@@ -1,0 +1,287 @@
+@import url(
+  'https://fonts.googleapis.com/css?family=Mukta:300,500,700');
+
+body{
+  margin: 0;
+  padding: 0;
+  background: url("../img/background.jpg") no-repeat center fixed;
+  background-size: cover;
+  font-family: 'Mukta', sans-serif;
+  --red: #B91E3B;
+  --yellow: #DCC12F;
+  --green: #006C13;
+  --bdxRed: #6d071a;
+  --darkBlue: #0A2C3A;
+  --lightBlue:#0385B9;
+  --transparentRed: rgba(109,7,26,0.75);
+}
+
+#content, #viewContent, #infosContainer{
+  margin: 1% auto;
+}
+
+#viewContent, #infosContainer, h1{
+  box-shadow: 1px 2px 3px var(--bdxRed);
+}
+
+/* Style du Header */
+header{
+  width: 100%;
+  margin: 0;
+}
+h1{
+  font-size: 1.75rem;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 700;
+  color: white;
+  text-shadow: 2px 2px 2px var(--darkBlue);
+  background-color: var(--transparentRed);
+  min-height: 7vh;
+  padding-top: 1%;
+}
+#content{
+  max-width: 100vw;
+  padding: 0;
+  margin: 0 auto;
+  border: none;
+}
+
+/* Style de la Map */
+#mapContainer{
+  min-height: 70vh;
+  width: 70vw;
+  padding: 0;
+}
+#viewContent{
+  border-radius: 25px;
+  width: 100%;
+}
+/* Style du formulaire + FicheInfoStation + Canvas */
+
+#titreStation{
+  margin: 5%;
+  padding: 2% 0;
+  text-align: center;
+  text-decoration: underline;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: 600;
+  background-color: rgba(0,0,0,0.25);
+  text-shadow: 2px 2px 2px black;
+  border-radius: 15px;
+  box-shadow: 1px 2px 3px black;
+}
+.hidden{
+  opacity: 0;
+}
+.stationsToulouse{
+  color: white;
+  margin: 5%;
+  padding: 15px;
+  min-height: 30vh;
+  border-radius: 15px;
+  background-color: rgba(0,0,0,0.25);
+  text-shadow: 2px 2px 2px black;
+  display: flex;
+  flex-wrap:wrap;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.25rem;
+  text-align: center;
+  box-shadow: 1px 2px 3px black;
+}
+.stationsToulouse *{
+  margin: 1% auto;
+}
+#stationAddress{
+  font-size: 1.25rem;
+  font-style: italic;
+}
+
+#totalStands, #totalBikes{
+  background-color: var(--bdxRed);
+  position: relative;
+  padding: 0;
+  border: 1px solid white;
+  height: 12px;
+  width: 200px;
+}
+#availableStands, #availableBikes{
+  position: absolute;
+  left: 0;
+  background-color: var(--green);
+  margin: 0;
+  height: 10px;
+}
+
+#formUtilisateur{
+  margin: 10% auto;
+}
+#formContainer{
+  background-color: var(--transparentRed);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  color: white;
+  padding-top: 1%;
+  min-height: 90vh;
+  border-radius: 0px 25px 25px 0px;
+}
+fieldset{
+  margin: 1%;
+  background-color: rgba(0,0,0, 0.25);
+}
+label{
+  color: white;
+  text-shadow: 1px 1px 2px var(--darkBlue);
+  font-size: 1.1rem;
+  text-decoration: underline;
+  margin: 0 1%;
+}
+input{
+  box-shadow: 1px 2px 3px var(--darkBlue);
+  border-radius: 5px;
+}
+#buttonForm{
+  margin: 0 auto;
+  width: 120px;
+  box-shadow: 1px 2px 3px var(--darkBlue);
+}
+#submitForm.btn.btn-info{
+  background-color: var(--lightBlue);
+  text-shadow: 1px 1px 1px var(--darkBlue);
+  width: 120px;
+  border: 1px solid white;
+}
+#canvasesContainer{
+  display: none;
+  margin: 1% auto;
+}
+#signature{
+  color: black;
+  background-color: white;
+}
+#buttons{
+  width: 220px;
+  margin: 1% auto;
+}
+#buttons .btn{
+  width: 100px;
+  margin: none;
+}
+
+#mapid{ width: 100%; height: 100%;
+  border-radius: 25px 0px 0px 25px;}
+#mapid:hover{
+  cursor: hand;
+}
+
+/* Style de la section Infos Reservation */
+
+#infosContainer{
+  background-color: var(--transparentRed);
+  min-height: 20vh;
+  padding: 1% 2%;
+  border-radius: 25px;
+  color: white;
+  text-align: center;
+  text-shadow: 1px 1px 1px black;
+  font-size: 1.125rem;
+}
+#infosContainer *{
+  width: 100%;
+  border-radius: 25px;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------
+
+  STYLE DU SLIDER
+
+--------------------------------------------------------------------------------------------------------------- */
+
+#sliderContainer{
+  position: relative;
+  /*display: none;*/
+}
+.arrow{
+  position: absolute;
+  bottom: 50%;
+  margin:  0.5%;
+
+}
+#arrowRight{
+  right: 0%;
+}
+#sliderControls{
+  position: absolute;
+  width: 50px;
+  top:5%;
+  right: 0;
+}
+.sliderControls, .arrow{
+  width: 42px;
+  height: 42px;
+  text-align: center;
+  color: white;
+  padding: 9px;
+  background-color: var(--bdxRed);
+  border: 2px solid white;
+  border-radius: 50%;
+}
+#playSlider{
+ display: none;
+}
+#slides{
+  min-height: 400px;
+  max-width: 1660px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.slides{
+  display: none;
+  flex-basis: 100%;
+  min-height: 400px;
+  width: 1200px;
+}
+.slides.slide-active{
+  display: block;
+}
+#slide1{
+  background-image: url('http://placehold.jp/0385B9/6D071A/1300x400.png?text=1');
+}
+#slide2{
+  background-image: url('http://placehold.jp/0A2C3A/B91E3B/1300x400.png?text=2');
+}
+#slide3{
+  background-image: url('http://placehold.jp/0385B9/6D071A/1300x400.png?text=3');
+}
+#slide4{
+  background-image: url('http://placehold.jp/0A2C3A/B91E3B/1300x400.png?text=4');
+}
+#sliderButtons{
+  background-color: transparent;
+  position: absolute;
+  width: 25vw;
+  margin: 1% auto;
+  display: inline-flex;
+  justify-content: space-between;
+  bottom: 0;
+  left: 34.25%;
+}
+
+.sliderButtons{
+  background-color: #6d071a;
+  min-height: 24px;
+  min-width: 24px;
+  padding: 2px;
+  border: 2px solid white;
+  border-radius: 50%;
+}
+
+
+
+
+
+

@@ -32,7 +32,7 @@ class StationObject {
     let self = this;
     stationMarker.on('click', function(){
       $('#canvasesContainer').css("display", "none");
-      $('#submitForm').css("display", "block");
+      $('#formUtilisateur').css("display", "block");
       $('.infosReservation').css('display', 'none');
       self.markerOnClick();
       form.off();

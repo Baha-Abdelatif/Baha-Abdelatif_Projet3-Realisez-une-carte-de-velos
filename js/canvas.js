@@ -15,7 +15,7 @@ class Canvas{
   } // Fin constructor
   init(reservation){
     $('#canvasesContainer').css("display", "block");
-    $('#submitForm').css("display", "none");
+    $('#formUtilisateur').css("display", "none");
     var self = this;
     $('#signature').mousemove(function(e){
       self.mousemove(e)
@@ -89,6 +89,8 @@ class Canvas{
     if(self.paint){
       self.paint = false;
     }
+    $('#canvasesContainer').css("display", "none");
+    $('#formUtilisateur').css("display", "block");
   };
   validationSignature(reservation){
     if(this.clickDrag.length>0){
@@ -97,7 +99,7 @@ class Canvas{
       compteur = setInterval(reservation.countDown,60000);
       this.clearBoard(this);
       $('#canvasesContainer').css("display", "none");
-      $('#submitForm').css("display", "block");
+      $('#formUtilisateur').css("display", "block");
       $('#alerteReservation').html("Confirmation : Votre reservation a été enregistrée.");
       $('#nomReservation').html(`Réservation faite au nom de ${sessionStorage.nomReservation} ${sessionStorage.prenomReservation}.`);
       $('#dateReservation').html(`Le ${sessionStorage.heureReservation}`);

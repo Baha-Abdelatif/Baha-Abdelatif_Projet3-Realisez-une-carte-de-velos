@@ -1,3 +1,6 @@
+
+
+
 var compteur;
 function dateFr()
 {

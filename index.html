@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon.ico">
 	<title>VLooz-Résérvations de vélos à Toulouse</title>
 	<noscript>
-		<h5>L'exécution du JS n'est pas autorisée actuellement par le navigateur !
+		<h5>L'exécution de JavaScript n'est pas autorisée actuellement par le navigateur !
 		<br>Certaines fonctionnalités ne sont donc pas disponibles.</h5>
 	</noscript>
 	<script defer="" src="https://use.fontawesome.com/releases/v5.6.3/js/all.js" integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1" crossorigin="anonymous"></script>
@@ -25,41 +25,40 @@
 		<h1>Bienvenue sur V.Looz ! Service de locations à Toulouse</h1>
 	</header>
 	<div id="content" class="container">
-		<div id="slidesContainer">
-      <div id="sliderContainer">
-        <div id="sliderControls">
-          <div id="playSlider" class="sliderControls" title="Lancer le defilement">
-            <i class="fas fa-play"></i>
-          </div>
-          <div id="stopSlider" class="sliderControls" title="Arreter le defilement">
-            <i class="fa fa-times" aria-hidden="true"></i>
-          </div>
+		<div id="sliderContainer">
+      <a id="anchor" class="sliderControls" title="Passer la presentation." href="#viewContent"> GO !</a>
+      <div id="sliderControls">
+        <div id="playSlider" class="sliderControls" title="Lancer le defilement.">
+          <i class="fas fa-play"></i>
         </div>
-        <div class="arrow" id="arrowLeft">
-          <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        <div id="stopSlider" class="sliderControls" title="Arreter le defilement.">
+          <i class="fa fa-times" aria-hidden="true"></i>
         </div>
-        <div id="slides">
-          <div class="slides slide-active" id="slide1"></div>
-          <div class="slides" id="slide2"></div>
-          <div class="slides" id="slide3"></div>
-          <div class="slides" id="slide4"></div>
-          <div id="sliderButtons">
-            <div class="sliderButtons" id="button-slide1"></div>
-            <div class="sliderButtons" id="button-slide2"></div>
-            <div class="sliderButtons" id="button-slide3"></div>
-            <div class="sliderButtons" id="button-slide4"></div>
-          </div>
+      </div>
+      <div class="arrow" id="arrowLeft">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+      </div>
+      <div id="slides">
+        <div class="slides slide-active" id="slide1"></div>
+        <div class="slides" id="slide2"></div>
+        <div class="slides" id="slide3"></div>
+        <div class="slides" id="slide4"></div>
+        <div id="sliderButtons">
+          <div class="sliderButtons" id="button-slide1"></div>
+          <div class="sliderButtons" id="button-slide2"></div>
+          <div class="sliderButtons" id="button-slide3"></div>
+          <div class="sliderButtons" id="button-slide4"></div>
         </div>
-        <div class="arrow" id="arrowRight">
-          <i class="fa fa-arrow-right" aria-hidden="true"></i>
-        </div>
+      </div>
+      <div class="arrow" id="arrowRight">
+        <i class="fa fa-arrow-right" aria-hidden="true"></i>
       </div>
 		</div>
 		<div id="viewContent" class="row">
-      <div class="col-xs-12 col-sm-12 col-lg-9" id="mapContainer">
+      <div id="mapContainer">
         <div id='mapid' ></div>
       </div>
-      <div class="col-xs-12 col-sm-12 col-lg-3" id="formContainer">
+      <div id="formContainer">
         <div id="listeStations">
           <h2 id="titreStation">Infos sur la station : </h2>
           <div class="stationsToulouse hidden">
@@ -76,13 +75,13 @@
         </div>
         <form id="formUtilisateur">
           <fieldset>
-            <div class="form-group row">
-              <label class="col-lg-3" for="nomUtilisateur">Nom :</label>
-              <input class="col-lg-8" type="text" id="nomUtilisateur" name="nomUtilisateur" placeholder="3 Caractères minimum...">
+            <div class="form-group">
+              <label for="nomUtilisateur">Nom :</label>
+              <input type="text" id="nomUtilisateur" name="nomUtilisateur" placeholder="3 Caractères minimum...">
             </div>
-            <div class="form-group row">
-              <label class="col-lg-3" for="prenomUtilisateur">Prénom :</label>
-              <input class="col-lg-8" type="text" id="prenomUtilisateur" name="prenomUtilisateur" placeholder="3 Caractères minimum...">
+            <div class="form-group">
+              <label for="prenomUtilisateur">Prénom :</label>
+              <input type="text" id="prenomUtilisateur" name="prenomUtilisateur" placeholder="3 Caractères minimum...">
             </div>
           </fieldset>
           <div id="buttonForm">
@@ -95,21 +94,21 @@
           </canvas>
           <br>
           <p id="buttons">
-            <button class="btn btn-danger" id="clearSignature">Clear</button>
+            <button class="btn btn-danger" id="clearSignature">Annuler</button>
             <button class="btn btn-success" id="submitSignature">Confirmer</button>
           </p>
         </div>
       </div>
+      <div class="mainContainer" id="infosContainer">
+        <div class="infosReservation" id="alerteReservation"></div>
+        <div class="infosReservation" id="nomReservation"></div>
+        <div class="infosReservation" id="dateReservation"></div>
+        <div class="infosReservation" id="countDownReservation">
+        </div>
+        <div class="infosReservation" id="idStationReservation"></div>
+        <div class="infosReservation" id="adresseStationReservation"></div>
+      </div>
     </div>
-		<div class="mainContainer row" id="infosContainer">
-			<div class="infosReservation" id="alerteReservation"></div>
-			<div class="infosReservation" id="nomReservation"></div>
-			<div class="infosReservation" id="dateReservation"></div>
-			<div class="infosReservation" id="countDownReservation">
-			</div>
-			<div class="infosReservation" id="idStationReservation"></div>
-			<div class="infosReservation" id="adresseStationReservation"></div>
-		</div>
 	</div>
 	<script
   src="https://code.jquery.com/jquery-3.3.1.min.js"

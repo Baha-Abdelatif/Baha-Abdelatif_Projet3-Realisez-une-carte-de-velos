@@ -1,4 +1,5 @@
 window.onload = function(){
+    sliderObject.init();
     $('.infosReservation').css('display', 'none');
     form.on('submit', (e) => {
         $('#alerteReservation').html('Réservation Impossible : Veuillez sélectionner une station.');
@@ -20,10 +21,12 @@ window.onload = function(){
         // transforme la requete en fichier JSON :
         var listeStations = reponse;
         for (station of listeStations){
-            var stationId = `stationObjectNo${station.number}`;
-            window[stationId] = new StationObject(station);
-            var stationMarker = window[stationId].addMarkerOnMap(mymap);
-        }
-    }
+            if(station.number !== 1033){
+                var stationId = `stationObjectNo${station.number}`;
+                window[stationId] = new StationObject(station);
+                var stationMarker = window[stationId].addMarkerOnMap(mymap);
+            }
+        } // Fermeture For station
+    } // Fermeture CallBack
 
 } // Fermeture onLoad()

@@ -7,7 +7,7 @@ class ReservationUtilisateur{
     this.nameStationReservation = station.nameStation;
     this.idStationReservation = station.id;
     this.addressStationReservation = station.address;
-    this.heureReservation = afficherHeure();
+    this.heureReservation = timeObjects.afficherHeure();
   } // Fin constructor
   clearSession(){
     sessionStorage.clear();

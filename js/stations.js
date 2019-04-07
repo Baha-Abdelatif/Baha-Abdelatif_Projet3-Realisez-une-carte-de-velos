@@ -20,11 +20,11 @@ class StationObject {
   } // Fin constructor
   getMarkerColor(){
     if(this.status !== "OPEN" || this.available_bikes <= 0){
-      return {icon: redIcon};
+      return {icon: markersColors.redIcon};
     }else if(this.status === "OPEN" && this.available_bike_stands <= 0 && this.available_bikes > 0){
-      return {icon: yellowIcon};
+      return {icon: markersColors.yellowIcon};
     }else if(this.status === "OPEN" && this.available_bikes > 0){
-      return {icon: greenIcon};
+      return {icon: markersColors.greenIcon};
     }
   } // Fin getMarkerColor
   addMarkerOnMap(map){

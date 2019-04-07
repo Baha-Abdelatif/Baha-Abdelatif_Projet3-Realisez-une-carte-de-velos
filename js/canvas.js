@@ -94,9 +94,9 @@ class Canvas{
   };
   validationSignature(reservation){
     if(this.clickDrag.length>0){
-      clearInterval(compteur);
+      clearInterval(timeObjects.compteur);
       reservation.sessionStorage();
-      compteur = setInterval(reservation.countDown,60000);
+      timeObjects.compteur = setInterval(reservation.countDown,60000);
       this.clearBoard(this);
       $('#canvasesContainer').css("display", "none");
       $('#formUtilisateur').css("display", "block");

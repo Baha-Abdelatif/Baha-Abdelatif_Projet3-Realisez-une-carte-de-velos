@@ -8,7 +8,6 @@ class Canvas{
     this.clickDrag = new Array();
     this.pencilCursor = "url('img/cursors/pencil.png') 32 32, auto";
     this.canvas.style.cursor = this.pencilCursor;
-    this.signatureUrl = "";
     this.paint;
     this.submitSignature = $('#submitSignature');
     this.clearSignature = $('#clearSignature');

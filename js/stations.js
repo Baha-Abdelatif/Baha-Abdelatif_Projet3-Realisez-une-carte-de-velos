@@ -39,7 +39,7 @@ class StationObject {
       form.on('submit', function(e){
         var formulaire = new Formulaire();
         var canvas = new Canvas();
-        var reservation = new ReservationUtilisateur(self, formulaire);
+        var reservation = new ReservationUtilisateur(self, formulaire, canvas);
         if(self.checkStatus()){
           formulaire.checkForm(self, reservation, canvas)
         }else{
@@ -63,7 +63,7 @@ class StationObject {
   emptyStation(){
     $('#alerteReservation').html('Réservation Impossible : Station vide.');
     $('#nomReservation').html('Veuillez selectionner une autre station ou revenir ulterieurement.');
-    $('#dateReservation').html('Derniere mise a jour le '+ afficherHeure());
+    $('#dateReservation').html('Derniere mise a jour le '+ timeObjects.afficherHeure());
     $('#idStationReservation').html('Nom de la station : '+this.nameStation);
     $('#adresseStationReservation').html('Adresse : '+this.address);
     $('.infosReservation').css('display', 'block');

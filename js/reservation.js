@@ -3,7 +3,6 @@ class ReservationUtilisateur{
     this.formulaire = formulaire;
     this.nomUtilisateur = formulaire.nomUtilisateur;
     this.prenomUtilisateur = formulaire.prenomUtilisateur;
-    this.signatureReservation = "";
     this.nameStationReservation = station.nameStation;
     this.idStationReservation = station.id;
     this.addressStationReservation = station.address;
@@ -32,7 +31,6 @@ class ReservationUtilisateur{
     localStorage.setItem("prenomUtilisateur", this.prenomUtilisateur);
     sessionStorage.setItem('nomReservation', this.nomUtilisateur);
     sessionStorage.setItem('prenomReservation', this.prenomUtilisateur);
-    sessionStorage.setItem('signatureReservation', this.signatureReservation);
     sessionStorage.setItem("nameStationReservation", this.nameStationReservation);
     sessionStorage.setItem('idStationReservation', this.idStationReservation);
     sessionStorage.setItem('addressStationReservation', this.addressStationReservation);

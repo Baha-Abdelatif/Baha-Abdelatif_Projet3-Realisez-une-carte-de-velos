@@ -81,7 +81,7 @@ h1{
   text-align: center;
   color: white;
   padding: 9px;
-  background-color: var(--bdxRed);
+  background-color: var(--darkBlue);
   border: 2px solid white;
   border-radius: 50%;
 }
@@ -99,19 +99,19 @@ h1{
   display: block;
 }
 #slide1{
-  background: url('http://placehold.jp/0385B9/6D071A/1300x400.png?text=1') no-repeat center center;
+  background: url('../img/slides/slide_01.png') no-repeat center center;
   background-size: cover;
 }
 #slide2{
-  background: url('http://placehold.jp/0A2C3A/B91E3B/1300x400.png?text=2') no-repeat center center;
+  background: url('../img/slides/slide_02.png') no-repeat center center;
   background-size: cover;
 }
 #slide3{
-  background: url('http://placehold.jp/0385B9/6D071A/1300x400.png?text=3') no-repeat center center;
+  background: url('../img/slides/slide_03.png') no-repeat center center;
   background-size: cover;
 }
 #slide4{
-  background: url('http://placehold.jp/0A2C3A/B91E3B/1300x400.png?text=4') no-repeat center center;
+  background: url('../img/slides/slide_04.png') no-repeat center center;
   background-size: cover;
 }
 .slides{
@@ -131,7 +131,7 @@ h1{
   left: 34.25%;
 }
 .sliderButtons{
-  background-color: #6d071a;
+  background-color: var(--darkBlue);
   min-height: 24px;
   min-width: 24px;
   padding: 2px;
@@ -253,6 +253,7 @@ input{
 #buttonForm{
   margin: 0 auto;
   width: 120px;
+  border-radius: 15px;
   box-shadow: 1px 2px 3px var(--darkBlue);
   background-color: var(--lightBlue);
 }
@@ -280,8 +281,14 @@ input{
 #buttons .btn{
   width: 100px;
   margin: none;
+  border: 1px solid white;
 }
-
+#clearSignature.btn-danger{
+  background-color: var(--bdxRed);
+}
+#submitSignature.btn-success{
+  background-color: var(--green);
+}
 /* Style de la section Infos Reservation */
 #infosContainer{
   background-color: var(--transparentRed);
@@ -312,19 +319,22 @@ input{
     position: static;
   }
   #anchor{
+    height: 60px;
+    width: 60px;
+    font-size: 25px;
     display: inline;
-    padding: 3px;
+    padding: 5px;
     background-color: white;
-    color: var(--green);
-    border: 2px solid var(--green);
+    color: var(--darkBlue);
+    border: 2px solid var(--darkBlue);
     border-radius: 50%;
     position: absolute;
     top: 5.75vh;
     left: 0.5%;
-    line-height: 2rem;
+    line-height: 50px;
   }
   #anchor:hover{
-    background-color: var(--green);
+    background-color: var(--darkBlue);
     color: white;
     border: 2px solid white;
   }

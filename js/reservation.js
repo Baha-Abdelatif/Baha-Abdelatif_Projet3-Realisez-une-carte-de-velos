@@ -13,19 +13,6 @@ class ReservationUtilisateur{
     sessionStorage.clear();
     localStorage.clear();
   } // Fin methode clearSession
-  countDown(){
-    if(sessionStorage.heureReservation){
-      if(sessionStorage.countDownReservation > 0){
-        sessionStorage.countDownReservation--;
-        $('#countDown').html(sessionStorage.countDownReservation);
-      }else{
-        sessionStorage.clear();
-        $('#alerteReservation').html("Votre reservation est expirée veuillez la renouveler.");
-        $('#alerteReservation').siblings().html("");
-        $('#alerteReservation').siblings().css('display', 'none');
-      }
-    }
-  } // Fin methode countDown
   sessionStorage(){
       // Stockage des données utilisateurs en local :
     localStorage.setItem("nomUtilisateur", this.nomUtilisateur);

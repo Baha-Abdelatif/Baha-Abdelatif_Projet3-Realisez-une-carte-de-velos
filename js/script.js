@@ -1,6 +1,7 @@
 window.onload = function(){
     sliderObject.init();
     $('.infosReservation').css('display', 'none');
+
     form.on('submit', (e) => {
         $('#alerteReservation').html('Réservation Impossible : Veuillez sélectionner une station.');
         $('#alerteReservation').css('display', 'block');;

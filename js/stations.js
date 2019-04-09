@@ -35,23 +35,24 @@ class StationObject {
       $('#formUtilisateur').css("display", "block");
       $('.infosReservation').css('display', 'none');
       self.markerOnClick();
-      form.off();
-      form.on('submit', function(e){
-        var formulaire = new Formulaire();
-        var canvas = new Canvas();
-        var reservation = new ReservationUtilisateur(self, formulaire, canvas);
-        if(self.checkStatus()){
-          formulaire.checkForm(self, reservation, canvas)
-        }else{
-          self.emptyStation();
-        }
-        e.preventDefault(); // Annulation de l'envoi des données
-      })
     });
     stationMarker.addTo(map);
   } // Fin addMarkerOnMap
   markerOnClick(){
     this.ficheInfoStation.eltCreator();
+    form.off();
+    let self = this;
+    form.on('submit', function(e){
+      var formulaire = new Formulaire();
+      var canvas = new Canvas();
+      var reservation = new ReservationUtilisateur(self, formulaire, canvas);
+      if(self.checkStatus()){
+        formulaire.checkForm(self, reservation, canvas)
+      }else{
+        self.emptyStation();
+      }
+      e.preventDefault(); // Annulation de l'envoi des données
+    })
   } // Fin markerOnclick
   checkStatus(){
     if(this.status === "OPEN" && this.available_bikes > 0){

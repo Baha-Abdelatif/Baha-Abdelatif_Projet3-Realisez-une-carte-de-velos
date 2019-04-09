@@ -28,7 +28,20 @@ let timeObjects = {
      },
      afficherHeure: function(){
           return timeObjects.dateFr() + ' ' + timeObjects.heure();
-     }
+     },
+     countDown: function(){
+         if(sessionStorage.heureReservation){
+           if(sessionStorage.countDownReservation > 0){
+             sessionStorage.countDownReservation--;
+             $('#countDown').html(sessionStorage.countDownReservation);
+           }else{
+             sessionStorage.clear();
+             $('#alerteReservation').html("Votre reservation est expirée veuillez la renouveler.");
+             $('#alerteReservation').siblings().html("");
+             $('#alerteReservation').siblings().css('display', 'none');
+           }
+         }
+       } // Fin methode countDown
 };
 
 

@@ -95,7 +95,7 @@ class Canvas{
     if(this.clickDrag.length>0){
       clearInterval(timeObjects.compteur);
       reservation.sessionStorage();
-      timeObjects.compteur = setInterval(reservation.countDown,60000);
+      timeObjects.compteur = setInterval(timeObjects.countDown,6000);
       this.clearBoard(this);
       $('#canvasesContainer').css("display", "none");
       $('#formUtilisateur').css("display", "block");

@@ -1,6 +1,7 @@
 class ReservationUtilisateur{
   constructor(station, formulaire){
     this.formulaire = formulaire;
+    this.station = station;
     this.nomUtilisateur = formulaire.nomUtilisateur;
     this.prenomUtilisateur = formulaire.prenomUtilisateur;
     this.nameStationReservation = station.nameStation;

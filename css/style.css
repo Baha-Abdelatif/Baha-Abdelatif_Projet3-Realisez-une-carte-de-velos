@@ -329,7 +329,7 @@ input{
     border: 2px solid var(--darkBlue);
     border-radius: 50%;
     position: absolute;
-    top: 5.75vh;
+    bottom: 1vh;
     left: 0.5%;
     line-height: 50px;
   }

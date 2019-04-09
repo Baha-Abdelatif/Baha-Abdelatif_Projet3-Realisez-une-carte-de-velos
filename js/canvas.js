@@ -106,6 +106,11 @@ class Canvas{
       $('#idStationReservation').html(`Nom de la station : ${sessionStorage.nameStationReservation}.`);
       $('#adresseStationReservation').html(`Adresse : ${sessionStorage.addressStationReservation}`);
       $('.infosReservation').css('display', 'block');
+      $('#stationAvailableStands').text(`${reservation.station.available_bike_stands+1}/${reservation.station.bike_stands} place(s) disponible(s).`);
+      $('#stationAvailableBikes').text(`${reservation.station.available_bikes-1} vélo(s) disponible(s).`);
+      $('.stationsToulouse').removeClass('hidden');
+      $('#availableStands').css('width', `${(((reservation.station.available_bike_stands+1) * 100)/reservation.station.bike_stands)*2-2}px`);
+      $('#availableBikes').css('width', `${(((reservation.station.available_bikes-1) * 100)/reservation.station.bike_stands)*2-2}px`);
     }else{
       $('#alerteReservation').html("Erreur : Veuillez signer le formulaire pour confirmer la reservation.");
       $('.infosReservation').css('display', 'block');

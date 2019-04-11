@@ -6,6 +6,9 @@ class Canvas{
     this.clickX = new Array();
     this.clickY = new Array();
     this.clickDrag = new Array();
+    this.clientRectX = this.canvas.getBoundingClientRect().x;
+    this.clientRectY = this.canvas.getBoundingClientRect().y;
+    this.touchDrag = new Array();
     this.pencilCursor = "url('img/cursors/pencil.png') 32 32, auto";
     this.canvas.style.cursor = this.pencilCursor;
     this.paint;
@@ -34,12 +37,15 @@ class Canvas{
     $('#submitSignature').mousedown(function(){
       self.validationSignature(reservation);
     });
-  }
+    this.canvas.addEventListener("touchstart", function(e){
+      self.touchStart(e,self)
+    }, false);
+  } // Fin méthode init
   addClick(x, y, dragging){
     this.clickX.push(x);
     this.clickY.push(y);
     this.clickDrag.push(dragging);
-  }
+  } // Fin méthode addClick
   redraw(){
     this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
     this.context.strokeStyle = "black";
@@ -56,24 +62,36 @@ class Canvas{
        this.context.closePath();
        this.context.stroke();
     }
-  }
+  } // Fin méthode redraw
   mousedown(e){
     this.paint = true;
     this.addClick(e.offsetX, e.offsetY);
     this.redraw();
-  }
+  } // Fin méthode mousedown
   mousemove(e){
     if(this.paint){
       this.addClick(e.offsetX, e.offsetY, true);
       this.redraw();
     }
-  }
+  } // Fin méthode mousemove
   mouseup(){
     this.paint = false;
-  }
+  } // Fin méthode mouseup
   mouseleave(){
     this.paint = false;
+  } // Fin méthode mouseleave
+
+  touchStart(e,self) {
+    infosSouris
+    e.preventDefault();
+    var touches = e.changedTouches;
+    for (var i=0; i<touches.length; i++) {
+      self.touchDrag.push(touches[i]);
+      self.context.fillRect(touches[i].clientX+self.clientRectX, touches[i].clientY+self.clientRectY, 4, 4);
+      console.log(touches[i].clientX+self.clientRectX, touches[i].clientY+self.clientRectY);
+    }
   }
+
   clearBoard(self){
     self.context.clearRect(0, 0, self.canvas.width, self.canvas.height);
     if(self.clickX){
@@ -90,12 +108,12 @@ class Canvas{
     }
     $('#canvasesContainer').css("display", "none");
     $('#formUtilisateur').css("display", "block");
-  };
+  }; // Fin méthode clearBoard
   validationSignature(reservation){
     if(this.clickDrag.length>0){
       clearInterval(timeObjects.compteur);
       reservation.sessionStorage();
-      timeObjects.compteur = setInterval(timeObjects.countDown,6000);
+      timeObjects.compteur = setInterval(timeObjects.countDown,60000);
       this.clearBoard(this);
       $('#canvasesContainer').css("display", "none");
       $('#formUtilisateur').css("display", "block");
@@ -115,12 +133,7 @@ class Canvas{
       $('#alerteReservation').html("Erreur : Veuillez signer le formulaire pour confirmer la reservation.");
       $('.infosReservation').css('display', 'block');
     }
-  };
+  }; // Fin méthode validationSignature
 } // Fin Class canvas
-
-
-
-
-
 
 

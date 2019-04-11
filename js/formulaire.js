@@ -30,7 +30,7 @@ class Formulaire {
     }else{
       return true
     }
-  }
+  } // Fin methode checkLength
   checkForm(self, reservation, canvas){
     if(this.checkLength()){
       this.returnedMessage = "Formulaire vérifié : Veuillez signer pour confirmer votre réservation.";
@@ -48,5 +48,5 @@ class Formulaire {
       $('#alerteReservation').css('display', 'block');
       $('.infosReservation').css('display', 'block');
     } // fin else if verif syntaxe form
-  } // methode checkForm
+  } // Fin methode checkForm
 } // Fin Classe Formulaire

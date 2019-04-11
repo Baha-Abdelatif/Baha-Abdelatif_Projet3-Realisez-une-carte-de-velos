@@ -138,6 +138,12 @@ h1{
   border: 2px solid white;
   border-radius: 50%;
 }
+.button-active, .sliderButtons:hover, .sliderControls:hover, .arrow:hover{
+  background-color: white;
+  border: 3px solid var(--darkBlue);
+  color: var(--darkBlue);
+  cursor: pointer;
+}
 
 /* Style de la Map */
 #mapContainer{
@@ -294,7 +300,7 @@ input{
   background-color: var(--transparentRed);
   height: 85vh;
   width: 95vw;
-  margin: 0 auto;
+  margin: 2% auto;
   border-radius: 25px;
   color: white;
   text-align: center;

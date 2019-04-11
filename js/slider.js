@@ -17,6 +17,8 @@ let sliderObject = {
   afficherSlide: function(index){
     $(`#slide${index}`).siblings().removeClass('slide-active');
     $(`#slide${index}`).addClass('slide-active');
+    $(`#button-slide${index}`).siblings().removeClass('button-active');
+    $(`#button-slide${index}`).addClass('button-active');
   },
   arrowsKeyboard: function(e){
     if(e.keyCode===37){
@@ -32,9 +34,9 @@ let sliderObject = {
   init: function(){
     for(let i =0; i<sliderObject.sliderTableau.length; i++){
       $(`#button-slide${i+1}`).on('click', function(){
-        $(`#slide${i+1}`).siblings().removeClass('slide-active');
-        $(`#slide${i+1}`).addClass('slide-active');
         sliderObject.slideActive = i + 1;
+        sliderObject.tchekClasse()
+        sliderObject.afficherSlide(sliderObject.slideActive);
       });
     }
     $('#arrowRight').on('click', function(){

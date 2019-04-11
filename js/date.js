@@ -31,7 +31,7 @@ let timeObjects = {
      },
      countDown: function(){
          if(sessionStorage.heureReservation){
-           if(sessionStorage.countDownReservation > 0){
+           if(sessionStorage.countDownReservation >= 0){
              sessionStorage.countDownReservation--;
              $('#countDown').html(sessionStorage.countDownReservation);
            }else{

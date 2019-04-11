@@ -18,8 +18,8 @@ class Canvas{
     $('#formUtilisateur').css("display", "none");
     var self = this;
     var clientRect = {
-      x : self.canvas.getBoundingClientRect().x,
-      y : self.canvas.getBoundingClientRect().y
+      x : self.canvas.getBoundingClientRect().left,
+      y : self.canvas.getBoundingClientRect().top
     };
     $('#signature').mousemove(function(e){
       self.mousemove(e)
@@ -97,7 +97,7 @@ class Canvas{
     var touches = e.changedTouches;
     for (var i=0; i<touches.length; i++) {
       self.touchDrag.push(touches[i]);
-      self.context.fillRect(touches[i].clientX-clientRect.x, touches[i].clientY-clientRect.y, 4, 4);
+      self.context.fillRect(touches[i].clientX-clientRect.x, touches[i].clientY - clientRect.y, 4, 4);
     }
   } // Fin methode touchStart
   touchMove(e,self,clientRect) {
@@ -111,6 +111,7 @@ class Canvas{
       self.context.closePath();
       self.context.stroke();
       self.touchDrag.splice(touchIndex, 1, touches[i]);  // mettre à jour la liste des touchers
+      console.log(clientRect.x, clientRect.y)
     }
   } // Fin methode touchMove
   touchEnd(e,self,clientRect) {

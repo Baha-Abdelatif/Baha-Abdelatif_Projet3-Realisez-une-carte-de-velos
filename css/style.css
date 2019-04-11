@@ -301,6 +301,7 @@ input{
   height: 85vh;
   width: 95vw;
   margin: 2% auto;
+  padding: 2%;
   border-radius: 25px;
   color: white;
   text-align: center;
@@ -428,3 +429,22 @@ input{
     text-align: left;
   }
 } /* Fin media queries desktop */
+
+/*-----------------------------------------------------------------------------------------------------------------------------------
+
+                                                    STYLE MOBILE
+
+-----------------------------------------------------------------------------------------------------------------------------------*/
+
+@media screen and (max-width: 590px){
+  #formContainer{
+    height : 90vh;
+  }
+  #infosContainer{
+    height: 25vh;
+  }
+  #mapContainer{
+    height: 100vh;
+    width: 95vw;
+  }
+} /* Fin media queries mobile */

@@ -6,8 +6,6 @@ class Canvas{
     this.clickX = new Array();
     this.clickY = new Array();
     this.clickDrag = new Array();
-    this.clientRectX = this.canvas.getBoundingClientRect().x;
-    this.clientRectY = this.canvas.getBoundingClientRect().y;
     this.touchDrag = new Array();
     this.pencilCursor = "url('img/cursors/pencil.png') 32 32, auto";
     this.canvas.style.cursor = this.pencilCursor;
@@ -19,6 +17,10 @@ class Canvas{
     $('#canvasesContainer').css("display", "block");
     $('#formUtilisateur').css("display", "none");
     var self = this;
+    var clientRect = {
+      x : self.canvas.getBoundingClientRect().x,
+      y : self.canvas.getBoundingClientRect().y
+    };
     $('#signature').mousemove(function(e){
       self.mousemove(e)
     });
@@ -38,7 +40,16 @@ class Canvas{
       self.validationSignature(reservation);
     });
     this.canvas.addEventListener("touchstart", function(e){
-      self.touchStart(e,self)
+      self.touchStart(e,self,clientRect)
+    }, false);
+    this.canvas.addEventListener("touchmove", function(e){
+      self.touchMove(e,self,clientRect)
+    }, false);
+    this.canvas.addEventListener("touchend", function(e){
+      self.touchEnd(e,self,clientRect)
+    }, false);
+    this.canvas.addEventListener("touchcancel", function(e){
+      self.touchCancel(e,self,clientRect)
     }, false);
   } // Fin méthode init
   addClick(x, y, dragging){
@@ -81,17 +92,54 @@ class Canvas{
     this.paint = false;
   } // Fin méthode mouseleave
 
-  touchStart(e,self) {
-    infosSouris
+  touchStart(e,self,clientRect) {
     e.preventDefault();
     var touches = e.changedTouches;
     for (var i=0; i<touches.length; i++) {
       self.touchDrag.push(touches[i]);
-      self.context.fillRect(touches[i].clientX+self.clientRectX, touches[i].clientY+self.clientRectY, 4, 4);
-      console.log(touches[i].clientX+self.clientRectX, touches[i].clientY+self.clientRectY);
+      self.context.fillRect(touches[i].clientX-clientRect.x, touches[i].clientY-clientRect.y, 4, 4);
+    }
+  } // Fin methode touchStart
+  touchMove(e,self,clientRect) {
+    e.preventDefault();
+    var touches = e.changedTouches;
+    for (var i=0; i<touches.length; i++) {
+      var touchIndex = self.findTouchDragIndex(touches[i].identifier, self);
+      self.context.beginPath();
+      self.context.moveTo(self.touchDrag[touchIndex].clientX - clientRect.x, self.touchDrag[touchIndex].clientY - clientRect.y);
+      self.context.lineTo(touches[i].clientX - clientRect.x, touches[i].clientY - clientRect.y);
+      self.context.closePath();
+      self.context.stroke();
+      self.touchDrag.splice(touchIndex, 1, touches[i]);  // mettre à jour la liste des touchers
+    }
+  } // Fin methode touchMove
+  touchEnd(e,self,clientRect) {
+    e.preventDefault();
+    var touches = e.changedTouches;
+    for (var i=0; i<touches.length; i++) {
+      var touchIndex = self.findTouchDragIndex(touches[i].identifier, self);
+      self.context.beginPath();
+      self.context.moveTo(self.touchDrag[i].clientX - clientRect.x, self.touchDrag[i].clientY - clientRect.y);
+      self.context.lineTo(touches[i].clientX - clientRect.x, touches[i].clientY - clientRect.y);
+      self.touchDrag.splice(i, 1);  // On enlève le point
     }
   }
-
+  touchCancel(e,self,clientRect) {
+    e.preventDefault();
+    var touches = e.changedTouches;
+    for (var i=0; i<touches.length; i++) {
+      self.touchDrag.splice(i, 1);  // on retire le point
+    }
+  }
+  findTouchDragIndex(idToFind,self) {
+    for (var i=0; i<self.touchDrag.length; i++) {
+      var id = self.touchDrag[i].identifier;
+      if (id == idToFind) {
+        return i;
+      }
+    }
+    return -1;    // toucher non trouvé
+  }
   clearBoard(self){
     self.context.clearRect(0, 0, self.canvas.width, self.canvas.height);
     if(self.clickX){

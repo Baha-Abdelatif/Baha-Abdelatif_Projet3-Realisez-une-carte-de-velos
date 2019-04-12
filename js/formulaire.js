@@ -1,4 +1,3 @@
-const form = $('#formUtilisateur');
 class Formulaire {
   constructor(){
     this.returnedMessage = "Réservation Impossible : </br>";
@@ -35,15 +34,15 @@ class Formulaire {
     if(this.checkLength()){
       this.returnedMessage = "Formulaire vérifié : Veuillez signer pour confirmer votre réservation.";
       $('#alerteReservation').html(this.returnedMessage);
-      $('#alerteReservation').siblings().html("");
+      $('#alerteReservation').siblings().text("");
       $('#alerteReservation').siblings().css('display', 'none');
       $('#alerteReservation').css('display', 'block');
       $('.infosReservation').css('display', 'block');
       canvas.init(reservation);
     }else{ // fin if verif syntaxe form
-      $('#alerteReservation').html("");
+      $('#alerteReservation').text("");
       $('#alerteReservation').html(this.returnedMessage);
-      $('#alerteReservation').siblings().html("");
+      $('#alerteReservation').siblings().text("");
       $('#alerteReservation').siblings().css('display', 'none');
       $('#alerteReservation').css('display', 'block');
       $('.infosReservation').css('display', 'block');

@@ -2,12 +2,12 @@ let timeObjects = {
      compteur : "",
      dateFr: function(){
           // les noms de jours / mois
-          var jours = new Array("dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi");
-          var mois = new Array("janvier", "fevrier", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "decembre");
+          let jours = new Array("dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi");
+          let mois = new Array("janvier", "fevrier", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "decembre");
           // on recupere la date
-          var date = new Date();
+          let date = new Date();
           // on construit le message
-          var message = jours[date.getDay()] + " ";   // nom du jour
+          let message = jours[date.getDay()] + " ";   // nom du jour
           message += date.getDate() + " ";   // numero du jour
           message += mois[date.getMonth()] + " ";   // mois
           message += date.getFullYear();
@@ -20,10 +20,10 @@ let timeObjects = {
           return chiffre;
      },
      heure: function (){
-          var date = new Date();
-          var heure = date.getHours();
-          var minutes = date.getMinutes();
-          var secondes = date.getSeconds();
+          let date = new Date();
+          let heure = date.getHours();
+          let minutes = date.getMinutes();
+          let secondes = date.getSeconds();
           return timeObjects.ajouterZero(heure) + ":" + timeObjects.ajouterZero(minutes) + ":" + timeObjects.ajouterZero(secondes);
      },
      afficherHeure: function(){
@@ -31,13 +31,20 @@ let timeObjects = {
      },
      countDown: function(){
          if(sessionStorage.heureReservation){
-           if(sessionStorage.countDownReservation >= 0){
-             sessionStorage.countDownReservation--;
-             $('#countDown').html(sessionStorage.countDownReservation);
-           }else{
+          if(sessionStorage.countDownReservationMin > 0 || sessionStorage.countDownReservationSec > 0){
+               if(sessionStorage.countDownReservationSec >= 0){
+                  sessionStorage.countDownReservationSec--;
+               }
+               if(sessionStorage.countDownReservationSec < 0){
+                   sessionStorage.countDownReservationSec = 59;
+                   sessionStorage.countDownReservationMin--;
+               }
+             $('#countDownSec').text(timeObjects.ajouterZero(sessionStorage.countDownReservationSec));
+             $('#countDownMin').text(timeObjects.ajouterZero(sessionStorage.countDownReservationMin));
+          }else{
              sessionStorage.clear();
-             $('#alerteReservation').html("Votre reservation est expirée veuillez la renouveler.");
-             $('#alerteReservation').siblings().html("");
+             $('#alerteReservation').text("Votre reservation est expirée veuillez la renouveler.");
+             $('#alerteReservation').siblings().text("");
              $('#alerteReservation').siblings().css('display', 'none');
            }
          }

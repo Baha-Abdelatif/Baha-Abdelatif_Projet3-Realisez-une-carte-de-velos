@@ -8,11 +8,11 @@ class ReservationUtilisateur{
     this.idStationReservation = station.id;
     this.addressStationReservation = station.address;
     this.heureReservation = timeObjects.afficherHeure();
+    this.countDownReservation = {
+      min : 20,
+      sec : 0,
+    }
   } // Fin constructor
-  clearSession(){
-    sessionStorage.clear();
-    localStorage.clear();
-  } // Fin methode clearSession
   sessionStorage(){
       // Stockage des données utilisateurs en local :
     localStorage.setItem("nomUtilisateur", this.nomUtilisateur);
@@ -23,6 +23,7 @@ class ReservationUtilisateur{
     sessionStorage.setItem('idStationReservation', this.idStationReservation);
     sessionStorage.setItem('addressStationReservation', this.addressStationReservation);
     sessionStorage.setItem('heureReservation', this.heureReservation);
-    sessionStorage.setItem('countDownReservation', 20);
+    sessionStorage.setItem('countDownReservationMin', this.countDownReservation.min);
+    sessionStorage.setItem('countDownReservationSec', this.countDownReservation.sec);
   } // Fin methode sessionStorage
 }// Fin class ReservationUtilisateur

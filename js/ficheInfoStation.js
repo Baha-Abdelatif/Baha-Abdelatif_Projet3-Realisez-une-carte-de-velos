@@ -1,4 +1,3 @@
-
 class FicheInfoStation {
   constructor(id, nameStation, address, available_bike_stands, bike_stands, available_bikes){
     this.id = id;

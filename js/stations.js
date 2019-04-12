@@ -43,9 +43,9 @@ class StationObject {
     form.off();
     let self = this;
     form.on('submit', function(e){
-      var formulaire = new Formulaire();
-      var canvas = new Canvas();
-      var reservation = new ReservationUtilisateur(self, formulaire, canvas);
+      let formulaire = new Formulaire();
+      let canvas = new Canvas();
+      let reservation = new ReservationUtilisateur(self, formulaire, canvas);
       if(self.checkStatus()){
         formulaire.checkForm(self, reservation, canvas)
       }else{
@@ -62,11 +62,11 @@ class StationObject {
     }
   } // Fin checkStatus
   emptyStation(){
-    $('#alerteReservation').html('Réservation Impossible : Station vide.');
-    $('#nomReservation').html('Veuillez selectionner une autre station ou revenir ulterieurement.');
-    $('#dateReservation').html('Derniere mise a jour le '+ timeObjects.afficherHeure());
-    $('#idStationReservation').html('Nom de la station : '+this.nameStation);
-    $('#adresseStationReservation').html('Adresse : '+this.address);
+    $('#alerteReservation').text('Réservation Impossible : Station vide.');
+    $('#nomReservation').text('Veuillez selectionner une autre station ou revenir ulterieurement.');
+    $('#dateReservation').text('Derniere mise a jour le '+ timeObjects.afficherHeure());
+    $('#idStationReservation').text('Nom de la station : '+this.nameStation);
+    $('#adresseStationReservation').text('Adresse : '+this.address);
     $('.infosReservation').css('display', 'block');
   } // Fin emptyStation
 } // Fin Class StationObject

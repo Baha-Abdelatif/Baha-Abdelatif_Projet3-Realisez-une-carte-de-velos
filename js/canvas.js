@@ -16,8 +16,9 @@ class Canvas{
   init(reservation){
     $('#canvasesContainer').css("display", "block");
     $('#formUtilisateur').css("display", "none");
-    var self = this;
-    var clientRect = {
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    let self = this;
+    let clientRect = {
       x : self.canvas.getBoundingClientRect().left,
       y : self.canvas.getBoundingClientRect().top
     };
@@ -62,7 +63,7 @@ class Canvas{
     this.context.strokeStyle = "black";
     this.context.lineJoin = "round";
     this.context.lineWidth = 3;
-    for(var i=0; i < this.clickX.length; i++) {
+    for(let i=0; i < this.clickX.length; i++) {
       this.context.beginPath();
       if(this.clickDrag[i] && i){
         this.context.moveTo(this.clickX[i-1], this.clickY[i-1]);
@@ -94,17 +95,17 @@ class Canvas{
 
   touchStart(e,self,clientRect) {
     e.preventDefault();
-    var touches = e.changedTouches;
-    for (var i=0; i<touches.length; i++) {
+    let touches = e.changedTouches;
+    for (let i=0; i<touches.length; i++) {
       self.touchDrag.push(touches[i]);
       self.context.fillRect(touches[i].clientX-clientRect.x, touches[i].clientY - clientRect.y, 4, 4);
     }
   } // Fin methode touchStart
   touchMove(e,self,clientRect) {
     e.preventDefault();
-    var touches = e.changedTouches;
-    for (var i=0; i<touches.length; i++) {
-      var touchIndex = self.findTouchDragIndex(touches[i].identifier, self);
+    let touches = e.changedTouches;
+    for (let i=0; i<touches.length; i++) {
+      let touchIndex = self.findTouchDragIndex(touches[i].identifier, self);
       self.context.beginPath();
       self.context.moveTo(self.touchDrag[touchIndex].clientX - clientRect.x, self.touchDrag[touchIndex].clientY - clientRect.y);
       self.context.lineTo(touches[i].clientX - clientRect.x, touches[i].clientY - clientRect.y);
@@ -116,9 +117,9 @@ class Canvas{
   } // Fin methode touchMove
   touchEnd(e,self,clientRect) {
     e.preventDefault();
-    var touches = e.changedTouches;
-    for (var i=0; i<touches.length; i++) {
-      var touchIndex = self.findTouchDragIndex(touches[i].identifier, self);
+    let touches = e.changedTouches;
+    for (let i=0; i<touches.length; i++) {
+      let touchIndex = self.findTouchDragIndex(touches[i].identifier, self);
       self.context.beginPath();
       self.context.moveTo(self.touchDrag[i].clientX - clientRect.x, self.touchDrag[i].clientY - clientRect.y);
       self.context.lineTo(touches[i].clientX - clientRect.x, touches[i].clientY - clientRect.y);
@@ -127,14 +128,14 @@ class Canvas{
   }
   touchCancel(e,self,clientRect) {
     e.preventDefault();
-    var touches = e.changedTouches;
-    for (var i=0; i<touches.length; i++) {
+    let touches = e.changedTouches;
+    for (let i=0; i<touches.length; i++) {
       self.touchDrag.splice(i, 1);  // on retire le point
     }
   }
   findTouchDragIndex(idToFind,self) {
-    for (var i=0; i<self.touchDrag.length; i++) {
-      var id = self.touchDrag[i].identifier;
+    for (let i=0; i<self.touchDrag.length; i++) {
+      let id = self.touchDrag[i].identifier;
       if (id == idToFind) {
         return i;
       }
@@ -162,16 +163,16 @@ class Canvas{
     if(this.clickDrag.length>0){
       clearInterval(timeObjects.compteur);
       reservation.sessionStorage();
-      timeObjects.compteur = setInterval(timeObjects.countDown,60000);
+      timeObjects.compteur = setInterval(timeObjects.countDown,1000);
       this.clearBoard(this);
       $('#canvasesContainer').css("display", "none");
       $('#formUtilisateur').css("display", "block");
-      $('#alerteReservation').html("Confirmation : Votre reservation a été enregistrée.");
-      $('#nomReservation').html(`Réservation faite au nom de ${sessionStorage.nomReservation} ${sessionStorage.prenomReservation}.`);
-      $('#dateReservation').html(`Le ${sessionStorage.heureReservation}`);
-      $('#countDownReservation').html(`Temps restant : <span id="countDown">${sessionStorage.countDownReservation}</span> minutes.`);
-      $('#idStationReservation').html(`Nom de la station : ${sessionStorage.nameStationReservation}.`);
-      $('#adresseStationReservation').html(`Adresse : ${sessionStorage.addressStationReservation}`);
+      $('#alerteReservation').text("Confirmation : Votre reservation a été enregistrée.");
+      $('#nomReservation').text(`Réservation faite au nom de ${sessionStorage.nomReservation} ${sessionStorage.prenomReservation}.`);
+      $('#dateReservation').text(`Le ${sessionStorage.heureReservation}`);
+      $('#countDownReservation').html(`Temps restant : <span id="countDownMin">${sessionStorage.countDownReservationMin}</span>mn<span id="countDownSec">${sessionStorage.countDownReservationSec}</span>s.`);
+      $('#idStationReservation').text(`Nom de la station : ${sessionStorage.nameStationReservation}.`);
+      $('#adresseStationReservation').text(`Adresse : ${sessionStorage.addressStationReservation}`);
       $('.infosReservation').css('display', 'block');
       $('#stationAvailableStands').text(`${reservation.station.available_bike_stands+1}/${reservation.station.bike_stands} place(s) disponible(s).`);
       $('#stationAvailableBikes').text(`${reservation.station.available_bikes-1} vélo(s) disponible(s).`);
@@ -179,7 +180,7 @@ class Canvas{
       $('#availableStands').css('width', `${(((reservation.station.available_bike_stands+1) * 100)/reservation.station.bike_stands)*2-2}px`);
       $('#availableBikes').css('width', `${(((reservation.station.available_bikes-1) * 100)/reservation.station.bike_stands)*2-2}px`);
     }else{
-      $('#alerteReservation').html("Erreur : Veuillez signer le formulaire pour confirmer la reservation.");
+      $('#alerteReservation').text("Erreur : Veuillez signer le formulaire pour confirmer la reservation.");
       $('.infosReservation').css('display', 'block');
     }
   }; // Fin méthode validationSignature

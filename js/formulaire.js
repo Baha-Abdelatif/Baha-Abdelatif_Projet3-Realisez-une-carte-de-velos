@@ -5,7 +5,7 @@ class Formulaire {
     this.prenomUtilisateur = document.getElementById('prenomUtilisateur').value;
   } // Fin constructor
   checkLength(){
-    const formRegex = /[\W+\d+]*[^\sa-zA-Z+\-áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+/m;
+    const formRegex = /[\W+\d+]*[^\s\'a-zA-Z+\-áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+/m;
     if((this.nomUtilisateur.length < 3) || (this.prenomUtilisateur.length < 3) || (this.nomUtilisateur.length > 21) || (this.prenomUtilisateur.length > 21) || (formRegex.test(this.prenomUtilisateur)) || (formRegex.test(this.nomUtilisateur))){
       if(this.nomUtilisateur.length < 3){
         this.returnedMessage += "Le nom est trop court (3 caracteres min.)<br/>";
@@ -25,9 +25,9 @@ class Formulaire {
       if(formRegex.test(this.nomUtilisateur)){
         this.returnedMessage += "Le nom contient des caractères non autorisés.<br/>";
       }
-      return false
+      return false;
     }else{
-      return true
+      return true;
     }
   } // Fin methode checkLength
   checkForm(self, reservation, canvas){

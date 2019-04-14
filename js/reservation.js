@@ -26,4 +26,27 @@ class ReservationUtilisateur{
     sessionStorage.setItem('countDownReservationMin', this.countDownReservation.min);
     sessionStorage.setItem('countDownReservationSec', this.countDownReservation.sec);
   } // Fin methode sessionStorage
+  sessionConfirm(){
+    clearInterval(timeObjects.compteur);
+    this.sessionStorage();
+    timeObjects.compteur = setInterval(timeObjects.countDown,1000);
+    $('#canvasesContainer').css("display", "none");
+    $('#formUtilisateur').css("display", "block");
+    $('#alerteReservation').text("Confirmation : Votre reservation a été enregistrée.");
+    $('#nomReservation').text(`Réservation faite au nom de ${sessionStorage.nomReservation} ${sessionStorage.prenomReservation}.`);
+    $('#dateReservation').text(`Le ${sessionStorage.heureReservation}`);
+    $('#countDownReservation').html(`Temps restant : <span id="countDownMin">${sessionStorage.countDownReservationMin}</span>mn<span id="countDownSec">${sessionStorage.countDownReservationSec}</span>s.`);
+    $('#idStationReservation').text(`Nom de la station : ${sessionStorage.nameStationReservation}.`);
+    $('#adresseStationReservation').text(`Adresse : ${sessionStorage.addressStationReservation}`);
+    $('.infosReservation').css('display', 'block');
+    $('#stationAvailableStands').text(`${this.station.available_bike_stands+1}/${this.station.bike_stands} place(s) disponible(s).`);
+    $('#stationAvailableBikes').text(`${this.station.available_bikes-1} vélo(s) disponible(s).`);
+    $('.stationsToulouse').removeClass('hidden');
+    $('#availableStands').css('width', `${(((this.station.available_bike_stands+1) * 100)/this.station.bike_stands)*2-2}px`);
+    $('#availableBikes').css('width', `${(((this.station.available_bikes-1) * 100)/this.station.bike_stands)*2-2}px`);
+  }
+  sessionError(){
+    $('#alerteReservation').text("Erreur : Veuillez signer le formulaire pour confirmer la reservation.");
+    $('.infosReservation').css('display', 'block');
+  }
 }// Fin class ReservationUtilisateur

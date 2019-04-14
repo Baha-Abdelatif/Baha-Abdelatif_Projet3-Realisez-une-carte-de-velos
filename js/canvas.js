@@ -5,8 +5,11 @@ class Canvas{
     this.context = this.canvas.getContext('2d');
     this.clickX = new Array();
     this.clickY = new Array();
+    this.touchX = new Array();
+    this.touchY = new Array();
     this.clickDrag = new Array();
     this.touchDrag = new Array();
+    this.touchCheck = 0;
     this.pencilCursor = "url('img/cursors/pencil.png') 32 32, auto";
     this.canvas.style.cursor = this.pencilCursor;
     this.paint;
@@ -17,6 +20,9 @@ class Canvas{
     $('#canvasesContainer').css("display", "block");
     $('#formUtilisateur').css("display", "none");
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.context.strokeStyle = "black";
+    this.context.lineJoin = "round";
+    this.context.lineWidth = 3;
     let self = this;
     let clientRect = {
       x : self.canvas.getBoundingClientRect().left,
@@ -26,31 +32,39 @@ class Canvas{
       self.mousemove(e)
     });
     $('#signature').mousedown(function(e){
-      self.mousedown(e)
+      if(e.which === 1){
+        self.mousedown(e)
+      }
     });
     $('#signature').mouseup(function(e){
-      self.mouseup(e)
+      if(e.which === 1){
+        self.mouseup(e)
+      }
     });
     $('#signature').mouseleave(function(e){
       self.mouseleave(e)
     });
-    $('#clearSignature').mousedown(function(){
-      self.clearBoard(self);
+    $('#clearSignature').mousedown(function(e){
+      if(e.which === 1){
+        self.clearBoard(self);
+      }
     });
-    $('#submitSignature').mousedown(function(){
-      self.validationSignature(reservation);
+    $('#submitSignature').mousedown(function(e){
+      if(e.which === 1){
+        self.validationSignature(reservation);
+      }
     });
     this.canvas.addEventListener("touchstart", function(e){
-      self.touchStart(e,self,clientRect)
+      self.touchdown(e,self,clientRect)
     }, false);
     this.canvas.addEventListener("touchmove", function(e){
-      self.touchMove(e,self,clientRect)
+      self.touchmove(e,self,clientRect)
     }, false);
     this.canvas.addEventListener("touchend", function(e){
-      self.touchEnd(e,self,clientRect)
+      self.touchup(e,self,clientRect)
     }, false);
     this.canvas.addEventListener("touchcancel", function(e){
-      self.touchCancel(e,self,clientRect)
+      self.touchcancel(e,self,clientRect)
     }, false);
   } // Fin méthode init
   addClick(x, y, dragging){
@@ -60,10 +74,7 @@ class Canvas{
   } // Fin méthode addClick
   redraw(){
     this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
-    this.context.strokeStyle = "black";
-    this.context.lineJoin = "round";
-    this.context.lineWidth = 3;
-    for(let i=0; i < this.clickX.length; i++) {
+    for(let i=0; i < this.clickX.length; i++){
       this.context.beginPath();
       if(this.clickDrag[i] && i){
         this.context.moveTo(this.clickX[i-1], this.clickY[i-1]);
@@ -92,56 +103,56 @@ class Canvas{
   mouseleave(){
     this.paint = false;
   } // Fin méthode mouseleave
-
-  touchStart(e,self,clientRect) {
+  touchdown(e,self,clientRect){
     e.preventDefault();
     let touches = e.changedTouches;
-    for (let i=0; i<touches.length; i++) {
+    for (let i=0; i<touches.length; i++){
       self.touchDrag.push(touches[i]);
       self.context.fillRect(touches[i].clientX-clientRect.x, touches[i].clientY - clientRect.y, 4, 4);
+      self.touchCheck++;
     }
-  } // Fin methode touchStart
-  touchMove(e,self,clientRect) {
+  } // Fin methode touchdown
+  touchmove(e,self,clientRect){
     e.preventDefault();
     let touches = e.changedTouches;
-    for (let i=0; i<touches.length; i++) {
+    for (let i=0; i<touches.length; i++){
       let touchIndex = self.findTouchDragIndex(touches[i].identifier, self);
       self.context.beginPath();
       self.context.moveTo(self.touchDrag[touchIndex].clientX - clientRect.x, self.touchDrag[touchIndex].clientY - clientRect.y);
       self.context.lineTo(touches[i].clientX - clientRect.x, touches[i].clientY - clientRect.y);
       self.context.closePath();
       self.context.stroke();
-      self.touchDrag.splice(touchIndex, 1, touches[i]);  // mettre à jour la liste des touchers
-      console.log(clientRect.x, clientRect.y)
+      self.touchDrag.splice(touchIndex, 1, touches[i]);
+      self.touchCheck++;
     }
-  } // Fin methode touchMove
-  touchEnd(e,self,clientRect) {
+  } // Fin methode touchmove
+  touchup(e,self,clientRect){
     e.preventDefault();
     let touches = e.changedTouches;
-    for (let i=0; i<touches.length; i++) {
+    for (let i=0; i<touches.length; i++){
       let touchIndex = self.findTouchDragIndex(touches[i].identifier, self);
       self.context.beginPath();
       self.context.moveTo(self.touchDrag[i].clientX - clientRect.x, self.touchDrag[i].clientY - clientRect.y);
       self.context.lineTo(touches[i].clientX - clientRect.x, touches[i].clientY - clientRect.y);
-      self.touchDrag.splice(i, 1);  // On enlève le point
+      self.touchDrag.splice(i, 1);
     }
-  }
-  touchCancel(e,self,clientRect) {
+  } // Fin methode touchup
+  touchcancel(e,self,clientRect){
     e.preventDefault();
     let touches = e.changedTouches;
-    for (let i=0; i<touches.length; i++) {
-      self.touchDrag.splice(i, 1);  // on retire le point
+    for (let i=0; i<touches.length; i++){
+      self.touchDrag.splice(i, 1);
     }
-  }
-  findTouchDragIndex(idToFind,self) {
-    for (let i=0; i<self.touchDrag.length; i++) {
+  } // Fin methode touchCancel
+  findTouchDragIndex(idToFind,self){
+    for (let i=0; i<self.touchDrag.length; i++){
       let id = self.touchDrag[i].identifier;
-      if (id == idToFind) {
+      if (id == idToFind){
         return i;
       }
     }
-    return -1;    // toucher non trouvé
-  }
+    return -1;
+  } // Fin methode findTouchDragIndex
   clearBoard(self){
     self.context.clearRect(0, 0, self.canvas.width, self.canvas.height);
     if(self.clickX){
@@ -156,32 +167,18 @@ class Canvas{
     if(self.paint){
       self.paint = false;
     }
+    if(self.touchCheck){
+      self.touchCheck = 0;
+    }
     $('#canvasesContainer').css("display", "none");
     $('#formUtilisateur').css("display", "block");
   }; // Fin méthode clearBoard
   validationSignature(reservation){
-    if(this.clickDrag.length>0){
-      clearInterval(timeObjects.compteur);
-      reservation.sessionStorage();
-      timeObjects.compteur = setInterval(timeObjects.countDown,1000);
+    if(this.clickDrag.length>0 || this.touchCheck>0){
       this.clearBoard(this);
-      $('#canvasesContainer').css("display", "none");
-      $('#formUtilisateur').css("display", "block");
-      $('#alerteReservation').text("Confirmation : Votre reservation a été enregistrée.");
-      $('#nomReservation').text(`Réservation faite au nom de ${sessionStorage.nomReservation} ${sessionStorage.prenomReservation}.`);
-      $('#dateReservation').text(`Le ${sessionStorage.heureReservation}`);
-      $('#countDownReservation').html(`Temps restant : <span id="countDownMin">${sessionStorage.countDownReservationMin}</span>mn<span id="countDownSec">${sessionStorage.countDownReservationSec}</span>s.`);
-      $('#idStationReservation').text(`Nom de la station : ${sessionStorage.nameStationReservation}.`);
-      $('#adresseStationReservation').text(`Adresse : ${sessionStorage.addressStationReservation}`);
-      $('.infosReservation').css('display', 'block');
-      $('#stationAvailableStands').text(`${reservation.station.available_bike_stands+1}/${reservation.station.bike_stands} place(s) disponible(s).`);
-      $('#stationAvailableBikes').text(`${reservation.station.available_bikes-1} vélo(s) disponible(s).`);
-      $('.stationsToulouse').removeClass('hidden');
-      $('#availableStands').css('width', `${(((reservation.station.available_bike_stands+1) * 100)/reservation.station.bike_stands)*2-2}px`);
-      $('#availableBikes').css('width', `${(((reservation.station.available_bikes-1) * 100)/reservation.station.bike_stands)*2-2}px`);
+      reservation.sessionConfirm();
     }else{
-      $('#alerteReservation').text("Erreur : Veuillez signer le formulaire pour confirmer la reservation.");
-      $('.infosReservation').css('display', 'block');
+      reservation.sessionError();
     }
   }; // Fin méthode validationSignature
 } // Fin Class canvas

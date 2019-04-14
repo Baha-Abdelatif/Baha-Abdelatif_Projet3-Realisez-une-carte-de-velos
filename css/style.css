@@ -27,7 +27,6 @@ body{
   max-width: 100vw;
   padding: 0;
   margin: 0 auto;
-  margin-top: 15vh;
   border: none;
 }
 
@@ -35,7 +34,7 @@ body{
 header{
   width: 100%;
   padding: 1.5%;
-  height: 15vh;
+  height: 10vh;
   background-color: var(--bdxRed);
   top: 0;
   left: 0;
@@ -45,6 +44,7 @@ header{
 h1{
   height: 100%;
   font-size: 1.75rem;
+  line-height: 3.5rem;
   text-transform: uppercase;
   text-align: center;
   font-weight: 700;
@@ -59,6 +59,7 @@ h1{
 #sliderContainer{
   position: relative;
   height: 85vh;
+  margin-bottom: 5vh;
 }
 .arrow{
   position: absolute;
@@ -98,20 +99,20 @@ h1{
   display: block;
 }
 #slide1{
-  background: url('../img/slides/slide_01.png') no-repeat center center;
-  background-size: cover;
+  background: url('../img/slides/slide_mobile_01.png') no-repeat center center;
+  background-size: contain;
 }
 #slide2{
-  background: url('../img/slides/slide_02.png') no-repeat center center;
-  background-size: cover;
+  background: url('../img/slides/slide_mobile_02.png') no-repeat center center;
+  background-size: contain;
 }
 #slide3{
-  background: url('../img/slides/slide_03.png') no-repeat center center;
-  background-size: cover;
+  background: url('../img/slides/slide_mobile_03.png') no-repeat center center;
+  background-size: contain;
 }
 #slide4{
-  background: url('../img/slides/slide_04.png') no-repeat center center;
-  background-size: cover;
+  background: url('../img/slides/slide_mobile_04.png') no-repeat center center;
+  background-size: contain;
 }
 .slides{
   display: none;
@@ -126,7 +127,7 @@ h1{
   margin: 1% auto;
   display: inline-flex;
   justify-content: space-between;
-  bottom: 0;
+  bottom: -5%;
   left: 34.25%;
 }
 .sliderButtons{
@@ -146,7 +147,7 @@ h1{
 
 /* Style de la Map */
 #mapContainer{
-  height: 85vh;
+  height: 65vh;
   width: 90%;
   margin: 0 auto;
   padding: 0;
@@ -305,9 +306,10 @@ input{
   color: white;
   text-align: center;
   text-shadow: 1px 1px 1px black;
-  font-size: 1.125rem;
+  font-size: 1.75rem;
 }
 #infosContainer *{
+  margin: 7.5% 0;
   border-radius: 25px;
 }
 
@@ -343,6 +345,22 @@ input{
     background-color: var(--darkBlue);
     color: white;
     border: 2px solid white;
+  }
+  #slide1{
+    background: url('../img/slides/slide_01.png') no-repeat center center;
+    background-size: contain;
+  }
+  #slide2{
+    background: url('../img/slides/slide_02.png') no-repeat center center;
+    background-size: contain;
+  }
+  #slide3{
+    background: url('../img/slides/slide_03.png') no-repeat center center;
+    background-size: contain;
+  }
+  #slide4{
+    background: url('../img/slides/slide_04.png') no-repeat center center;
+    background-size: contain;
   }
   /* Style du contenu */
   #content{
@@ -428,22 +446,3 @@ input{
     text-align: left;
   }
 } /* Fin media queries desktop */
-
-/*-----------------------------------------------------------------------------------------------------------------------------------
-
-                                                    STYLE MOBILE
-
------------------------------------------------------------------------------------------------------------------------------------*/
-
-@media screen and (max-width: 590px){
-  #formContainer{
-    height : 90vh;
-  }
-  #infosContainer{
-    height: 25vh;
-  }
-  #mapContainer{
-    height: 100vh;
-    width: 95vw;
-  }
-} /* Fin media queries mobile */

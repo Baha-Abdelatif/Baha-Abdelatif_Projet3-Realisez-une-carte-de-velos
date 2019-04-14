@@ -1,19 +1,14 @@
 class StationObject {
   constructor(station){
     //    Creation du titre de la station :
-    const regexStationName = /^[0-9]+\s.\s/gm;
-    const regexStationAddress = /[\s-\s]*31\d+\s[a-zA-z]+/gm;
+    const regexStationName = /^[0-9]+\s.\s/m;
+    const regexStationAddress = /[\s-\s]*31\d+\s[a-zA-z]+/m;
     this.id = station.contract_name+station.number;
     this.nameStation = station.name.replace(regexStationName,"");
     this.address = station.address.replace(regexStationAddress,"");
     this.available_bike_stands = station.available_bike_stands;
     this.available_bikes = station.available_bikes;
-    this.banking = station.banking;
     this.bike_stands = station.bike_stands;
-    this.bonus = station.bonus;
-    this.contract_name = station.contract_name;
-    this.last_update = station.last_update;
-    this.number = station.number;
     this.position = station.position;
     this.status = station.status;
     this.ficheInfoStation = new FicheInfoStation(this.id, this.nameStation, this.address, this.available_bike_stands, this.bike_stands, this.available_bikes);
@@ -40,6 +35,7 @@ class StationObject {
   } // Fin addMarkerOnMap
   markerOnClick(){
     this.ficheInfoStation.eltCreator();
+    const form = $('#formUtilisateur');
     form.off();
     let self = this;
     form.on('submit', function(e){
@@ -47,7 +43,7 @@ class StationObject {
       let canvas = new Canvas();
       let reservation = new ReservationUtilisateur(self, formulaire, canvas);
       if(self.checkStatus()){
-        formulaire.checkForm(self, reservation, canvas)
+        formulaire.checkForm(self, reservation, canvas);
       }else{
         self.emptyStation();
       }
@@ -62,6 +58,7 @@ class StationObject {
     }
   } // Fin checkStatus
   emptyStation(){
+    $('.infosReservation').text('');
     $('#alerteReservation').text('Réservation Impossible : Station vide.');
     $('#nomReservation').text('Veuillez selectionner une autre station ou revenir ulterieurement.');
     $('#dateReservation').text('Derniere mise a jour le '+ timeObjects.afficherHeure());

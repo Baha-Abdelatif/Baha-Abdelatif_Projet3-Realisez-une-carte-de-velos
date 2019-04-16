@@ -10,10 +10,9 @@
   	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
      integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
      crossorigin=""/>
-        <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
     integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   	<link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
@@ -26,7 +25,7 @@
   	</header>
   	<div id="content" class="container">
   		<div id="sliderContainer">
-        <a id="anchor" class="sliderControls" title="Passer la presentation." href="#viewContent"> GO !</a>
+        <a id="anchor" class="sliderControls" title="Passer la presentation." href="#viewContent">GO!</a>
         <div id="sliderControls">
           <div id="playSlider" class="sliderControls" title="Lancer le defilement.">
             <i class="fas fa-play"></i>
@@ -85,7 +84,7 @@
               </div>
             </fieldset>
             <div id="buttonForm">
-              <button class="btn btn-info" id="submitForm" type="submit">Signer</button>
+              <button class="btn btn-info" id="submitForm" title="Verifier le formulaire et signer pour confirmer" type="submit">Signer</button>
             </div>
           </form>
           <div class="mainContainer" id="canvasesContainer">
@@ -94,8 +93,8 @@
             </canvas>
             <br>
             <p id="buttons">
-              <button class="btn btn-danger" id="clearSignature">Annuler</button>
-              <button class="btn btn-success" id="submitSignature">Confirmer</button>
+              <button class="btn btn-danger" id="clearSignature" title="Revenir en arriere">Annuler</button>
+              <button class="btn btn-success" id="submitSignature" title="Confirmer la signature et reserver">Confirmer</button>
             </p>
           </div>
         </div>
@@ -103,8 +102,7 @@
           <div class="infosReservation" id="alerteReservation"></div>
           <div class="infosReservation" id="nomReservation"></div>
           <div class="infosReservation" id="dateReservation"></div>
-          <div class="infosReservation" id="countDownReservation">
-          </div>
+          <div class="infosReservation" id="countDownReservation"></div>
           <div class="infosReservation" id="idStationReservation"></div>
           <div class="infosReservation" id="adresseStationReservation"></div>
         </div>
@@ -115,11 +113,11 @@
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
-    <script src="js/slider.js"></script>
     <script src="js/handlers.js"></script>
     <script src="js/date.js"></script>
-    <script src="js/markersColors.js"></script>
+    <script src="js/slider.js"></script>
     <script src="js/stations.js"></script>
+    <script src="js/markersColors.js"></script>
     <script src="js/ficheInfoStation.js"></script>
     <script src="js/formulaire.js"></script>
     <script src="js/canvas.js"></script>

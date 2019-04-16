@@ -1,54 +1,60 @@
 let timeObjects = {
      compteur : "",
-     dateFr: function(){
+     dateFr(){
+          // Retourne une date au format "Dimanche 01 Janvier 2020"
           // les noms de jours / mois
-          let jours = new Array("dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi");
-          let mois = new Array("janvier", "fevrier", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "decembre");
-          // on recupere la date
+          let jours = new Array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
+          let mois = new Array("Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre");
           let date = new Date();
-          // on construit le message
-          let message = jours[date.getDay()] + " ";   // nom du jour
-          message += date.getDate() + " ";   // numero du jour
-          message += mois[date.getMonth()] + " ";   // mois
+          let message = `${jours[date.getDay()]} `;
+          message += `${timeObjects.ajouterZero(date.getDate())} `;
+          message += `${mois[date.getMonth()]} `;
           message += date.getFullYear();
           return message;
-     },
-     ajouterZero: function(chiffre){
+     }, // Fin methode dateFr
+
+     ajouterZero(chiffre){
+          // Ajoute un zero avant un chiffre s'il est inferieur a 10
           if(chiffre<10){
                chiffre = '0'+chiffre;
           }
           return chiffre;
-     },
-     heure: function (){
+     }, // Fin methode ajouterZero
+
+     heure(){
+          // Retourne une heure au format "hh:mm:ss"
           let date = new Date();
           let heure = date.getHours();
           let minutes = date.getMinutes();
           let secondes = date.getSeconds();
-          return timeObjects.ajouterZero(heure) + ":" + timeObjects.ajouterZero(minutes) + ":" + timeObjects.ajouterZero(secondes);
-     },
-     afficherHeure: function(){
+          return `${timeObjects.ajouterZero(heure)}:${timeObjects.ajouterZero(minutes)}:${timeObjects.ajouterZero(secondes)}`;
+     }, // Fin methode heure
+
+     afficherHeure(){
+          // Retourne la date et l'heure
           return timeObjects.dateFr() + ' ' + timeObjects.heure();
-     },
-     countDown: function(){
-         if(sessionStorage.heureReservation){
-          if(sessionStorage.countDownReservationMin > 0 || sessionStorage.countDownReservationSec > 0){
-               if(sessionStorage.countDownReservationSec >= 0){
-                  sessionStorage.countDownReservationSec--;
-               }
-               if(sessionStorage.countDownReservationSec < 0){
-                   sessionStorage.countDownReservationSec = 59;
-                   sessionStorage.countDownReservationMin--;
-               }
-             $('#countDownSec').text(timeObjects.ajouterZero(sessionStorage.countDownReservationSec));
-             $('#countDownMin').text(timeObjects.ajouterZero(sessionStorage.countDownReservationMin));
-          }else{
-             sessionStorage.clear();
-             $('#alerteReservation').text("Votre reservation est expirée veuillez la renouveler.");
-             $('#alerteReservation').siblings().text("");
-             $('#alerteReservation').siblings().css('display', 'none');
-           }
-         }
-       } // Fin methode countDown
+     }, // Fin methode afficherHeure
+
+     countDown(){
+        // Compte a rebours reservation
+        let instantT = Date.now(); // timestamp lors de l'appel a la fonction
+        let expirationDate = parseInt(sessionStorage.timestampReservation) + 1200000; // timestamp lors de la confirmation de la reservation + 1200000 millisecondes (20mn)
+        let tempsRestant = (expirationDate-instantT);
+        let min = Math.floor(tempsRestant/60000);
+        let sec = Math.floor((tempsRestant - (min*60000))/1000);
+        if(min > 0 || sec > 0){
+          $('#countDownSec').text(timeObjects.ajouterZero(sec));
+          $('#countDownMin').text(timeObjects.ajouterZero(min));
+          sessionStorage.setItem('countDownReservationMin', timeObjects.ajouterZero(min));
+          sessionStorage.setItem('countDownReservationSec', timeObjects.ajouterZero(sec));
+        }else{
+          sessionStorage.clear();
+          clearInterval(timeObjects.compteur);
+          $('#alerteReservation').text("Votre reservation est expirée veuillez la renouveler.");
+          $('#alerteReservation').siblings().text("");
+          $('#alerteReservation').siblings().css('display', 'none');
+        }
+     } // Fin methode countDown
 };
 
 

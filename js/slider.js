@@ -1,68 +1,77 @@
 let sliderObject = {
   sliderTableau: ['slide1','slide2','slide3','slide4'],
   slideActive: 1,
-  sliderTimer: setInterval(function(){
-    sliderObject.slideActive++;
-    sliderObject.tchekClasse();
-    sliderObject.afficherSlide(sliderObject.slideActive);
+  sliderTimer: setInterval(()=>{
+    sliderObject.nextSlide();
   }, 5000),
-  tchekClasse: function(){
-    if(sliderObject.slideActive >= sliderObject.sliderTableau.length+1){
-      sliderObject.slideActive = 1;
-    }
-    if(sliderObject.slideActive < 1){
-      sliderObject.slideActive = 4;
-    }
-  },
-  afficherSlide: function(index){
-    $(`#slide${index}`).siblings().removeClass('slide-active');
-    $(`#slide${index}`).addClass('slide-active');
-    $(`#button-slide${index}`).siblings().removeClass('button-active');
-    $(`#button-slide${index}`).addClass('button-active');
-  },
-  arrowsKeyboard: function(e){
-    if(e.keyCode===37){
-      sliderObject.slideActive--;
-      sliderObject.tchekClasse();
-      sliderObject.afficherSlide(sliderObject.slideActive);
-    }else if(e.keyCode===39){
-      sliderObject.slideActive++;
-      sliderObject.tchekClasse();
-      sliderObject.afficherSlide(sliderObject.slideActive);
-    }
-  },
-  init: function(){
+
+  init(){
     for(let i =0; i<sliderObject.sliderTableau.length; i++){
-      $(`#button-slide${i+1}`).on('click', function(){
+      $(`#button-slide${i+1}`).on('click', ()=>{
         sliderObject.slideActive = i + 1;
-        sliderObject.tchekClasse()
+        sliderObject.checkInterval()
         sliderObject.afficherSlide(sliderObject.slideActive);
       });
     }
-    $('#arrowRight').on('click', function(){
-        sliderObject.slideActive++;
-        sliderObject.tchekClasse();
-        sliderObject.afficherSlide(sliderObject.slideActive);
+    $('#arrowRight').on('click', ()=>{
+        sliderObject.nextSlide();
     });
-    $('#arrowLeft').on('click', function(){
-        sliderObject.slideActive--;
-        sliderObject.tchekClasse();
-        sliderObject.afficherSlide(sliderObject.slideActive);
+    $('#arrowLeft').on('click', ()=>{
+        sliderObject.previousSlide();
     });
-    $('#stopSlider').on('click', function(){
+    $('#stopSlider').on('click', ()=>{
       clearInterval(sliderObject.sliderTimer);
       $('#stopSlider').css('display', 'none');
       $('#playSlider').css('display', 'block');
     });
-    $('#playSlider').on('click', function(){
-      sliderObject.sliderTimer = setInterval(function(){
-        sliderObject.slideActive++;
-        sliderObject.tchekClasse();
-        sliderObject.afficherSlide(sliderObject.slideActive);
+    $('#playSlider').on('click', ()=>{
+      sliderObject.sliderTimer = setInterval(()=>{
+        sliderObject.nextSlide();
       }, 5000);
       $('#stopSlider').css('display', 'block');
       $('#playSlider').css('display', 'none');
     });
     $(document).on('keydown', sliderObject.arrowsKeyboard)
-  } // Fin Init()
+  }, // Fin Init()
+
+  previousSlide(){
+    // Méthode chargée de passer a la slide suivante
+    sliderObject.slideActive--;
+    sliderObject.checkInterval();
+    sliderObject.afficherSlide(sliderObject.slideActive);
+  }, // Fin Méthode previousSlide
+
+  nextSlide(){
+    // Méthode chargée de passer a la slide precedente
+    sliderObject.slideActive++;
+    sliderObject.checkInterval();
+    sliderObject.afficherSlide(sliderObject.slideActive);
+  }, // Fin Méthode nextSlide
+
+  checkInterval(){
+    // Methode verifiant que la slide est dans l'intervale
+    if(sliderObject.slideActive >= sliderObject.sliderTableau.length+1){
+      sliderObject.slideActive = 1;
+    }
+    if(sliderObject.slideActive < 1){
+      sliderObject.slideActive = sliderObject.sliderTableau.length;
+    }
+  }, // Fin Méthode checkInterval
+
+  afficherSlide(index){
+    // Methode chargée d'afficher et masquer les slides
+    $(`#slide${index}`).siblings().removeClass('slide-active');
+    $(`#slide${index}`).addClass('slide-active');
+    $(`#button-slide${index}`).siblings().removeClass('button-active');
+    $(`#button-slide${index}`).addClass('button-active');
+  }, // Fin Méthode afficherSlide
+
+  arrowsKeyboard(e){
+    // Methode de controle du slider aux fleches du clavier
+    if(e.keyCode===37){ // fleche gauche
+      sliderObject.previousSlide();
+    }else if(e.keyCode===39){ // fleche droite
+      sliderObject.nextSlide();
+    }
+  } // Fin Méthode arrowsKeyboard
 }

@@ -10,23 +10,29 @@ class ReservationUtilisateur{
     this.heureReservation = timeObjects.afficherHeure();
     this.countDownReservation = {
       min : 20,
-      sec : 0,
-    }
+      sec : "00",
+    };
   } // Fin constructor
+
   sessionStorage(){
-      // Stockage des données utilisateurs en local :
+    // Stockage des données utilisateurs en local :
     localStorage.setItem("nomUtilisateur", this.nomUtilisateur);
     localStorage.setItem("prenomUtilisateur", this.prenomUtilisateur);
     sessionStorage.setItem('nomReservation', this.nomUtilisateur);
     sessionStorage.setItem('prenomReservation', this.prenomUtilisateur);
     sessionStorage.setItem("nameStationReservation", this.nameStationReservation);
-    sessionStorage.setItem('idStationReservation', this.idStationReservation);
     sessionStorage.setItem('addressStationReservation', this.addressStationReservation);
     sessionStorage.setItem('heureReservation', this.heureReservation);
     sessionStorage.setItem('countDownReservationMin', this.countDownReservation.min);
     sessionStorage.setItem('countDownReservationSec', this.countDownReservation.sec);
+    sessionStorage.setItem('timestampReservation', Date.now());
   } // Fin methode sessionStorage
+
   sessionConfirm(){
+    // Confirmation de la reservation
+    // Initialisation du compte a rebours
+    // initialisation du stockage des données utilisateur
+    // Affichage des informations reservation
     clearInterval(timeObjects.compteur);
     this.sessionStorage();
     timeObjects.compteur = setInterval(timeObjects.countDown,1000);
@@ -44,9 +50,24 @@ class ReservationUtilisateur{
     $('.stationsToulouse').removeClass('hidden');
     $('#availableStands').css('width', `${(((this.station.available_bike_stands+1) * 100)/this.station.bike_stands)*2-2}px`);
     $('#availableBikes').css('width', `${(((this.station.available_bikes-1) * 100)/this.station.bike_stands)*2-2}px`);
-  }
+  } // Fin methode sessionConfirm
+
   sessionError(){
+    // Rejet de la reservation
+    // Affichage d'un message d'erreur
     $('#alerteReservation').text("Erreur : Veuillez signer le formulaire pour confirmer la reservation.");
     $('.infosReservation').css('display', 'block');
-  }
+  } // Fin Methode sessionError
+
+  emptyStation(station){
+    // Methode appelée si la station selectionée est vide
+    $('.infosReservation').text('');
+    $('#alerteReservation').text('Réservation Impossible : Station vide.');
+    $('#nomReservation').text('Veuillez selectionner une autre station ou revenir ulterieurement.');
+    $('#dateReservation').text(`Derniere mise a jour le ${timeObjects.afficherHeure()}`);
+    $('#idStationReservation').text(`Nom de la station : ${station.nameStation}`);
+    $('#adresseStationReservation').text(`Adresse : ${station.address}`);
+    $('.infosReservation').css('display', 'block');
+  } // Fin emptyStation
 }// Fin class ReservationUtilisateur
+

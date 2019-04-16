@@ -26,7 +26,7 @@ body{
 #content{
   max-width: 100vw;
   padding: 0;
-  margin: 0 auto;
+  margin: 1% auto;
   border: none;
 }
 
@@ -39,7 +39,6 @@ header{
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000000;
 }
 h1{
   height: 100%;
@@ -54,7 +53,9 @@ h1{
 
 /* style du slider */
 #anchor{
-  display: none;
+  position: absolute;
+  top:5%;
+  left: 0;
 }
 #sliderContainer{
   position: relative;
@@ -76,8 +77,10 @@ h1{
   right: 0;
 }
 .sliderControls, .arrow{
-  width: 42px;
-  height: 42px;
+  width: 50px;
+  height: 50px;
+  font-size: 1rem;
+  line-height: 2rem;
   text-align: center;
   color: white;
   padding: 9px;
@@ -128,7 +131,8 @@ h1{
   display: inline-flex;
   justify-content: space-between;
   bottom: -5%;
-  left: 34.25%;
+  left: 25%;
+  right: 25%;
 }
 .sliderButtons{
   background-color: var(--darkBlue);
@@ -143,6 +147,7 @@ h1{
   border: 3px solid var(--darkBlue);
   color: var(--darkBlue);
   cursor: pointer;
+  text-decoration: none;
 }
 
 /* Style de la Map */
@@ -174,40 +179,46 @@ h1{
   color: white;
   border-radius: 25px;
 }
+#listeStations{
+  margin: 2.5%;
+  padding: 5px;
+}
 #titreStation{
-  margin: 5%;
-  padding: 2% 0;
+  min-height: 7vh;
+  max-height: 7vh;
+  margin: 2.5%;
   text-align: center;
   text-decoration: underline;
   text-transform: uppercase;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
+  line-height: 3rem;
   font-weight: 600;
   background-color: rgba(0,0,0,0.25);
   text-shadow: 2px 2px 2px black;
   border-radius: 15px;
   box-shadow: 1px 2px 3px black;
+  word-break: keep-all;
 }
 .hidden{
   opacity: 0;
 }
 .stationsToulouse{
   color: white;
-  margin: 5%;
-  padding: 15px;
   min-height: 30vh;
+  max-height: 30vh;
   border-radius: 15px;
   background-color: rgba(0,0,0,0.25);
   text-shadow: 2px 2px 2px black;
   display: flex;
   flex-wrap:wrap;
   flex-direction: column;
-  justify-content: center;
-  font-size: 1.75rem;
+  justify-content: space-evenly;
+  font-size: 1.5rem;
   text-align: center;
   box-shadow: 1px 2px 3px black;
 }
 .stationsToulouse *{
-  margin: 1% auto;
+  margin: 0 auto;
 }
 #stationAddress{
   font-style: italic;
@@ -217,7 +228,7 @@ h1{
   position: relative;
   padding: 0;
   border: 1px solid white;
-  height: 12px;
+  height: 10px;
   width: 200px;
 }
 #availableStands, #availableBikes{
@@ -225,18 +236,19 @@ h1{
   left: 0;
   background-color: var(--green);
   margin: 0;
-  height: 10px;
+  height: 8px;
 }
 
 /* Style du formulaire */
 #formUtilisateur{
   width: 95vw;
-  margin: 5% auto;
+  margin: 2.5% auto;
 }
 fieldset{
   width: 100%;
-  padding: 5% 2.5%;
+  padding: 2.5%;
   margin: 1% auto;
+  border-radius: 5px;
   background-color: rgba(0,0,0, 0.25);
 }
 label{
@@ -298,7 +310,7 @@ input{
 /* Style de la section Infos Reservation */
 #infosContainer{
   background-color: var(--transparentRed);
-  height: 85vh;
+  height: 55vh;
   width: 95vw;
   margin: 2% auto;
   padding: 2%;
@@ -306,10 +318,10 @@ input{
   color: white;
   text-align: center;
   text-shadow: 1px 1px 1px black;
-  font-size: 1.75rem;
+  font-size: 1.25rem;
 }
 #infosContainer *{
-  margin: 7.5% 0;
+  margin: 2.5% 0;
   border-radius: 25px;
 }
 
@@ -324,27 +336,22 @@ input{
   /* Style du header */
   header{
     height: 10vh;
-    position: static;
   }
-  #anchor{
-    height: 60px;
-    width: 60px;
-    font-size: 25px;
-    display: inline;
-    padding: 5px;
-    background-color: white;
-    color: var(--darkBlue);
-    border: 2px solid var(--darkBlue);
-    border-radius: 50%;
-    position: absolute;
-    bottom: 1vh;
-    left: 0.5%;
-    line-height: 50px;
-  }
-  #anchor:hover{
-    background-color: var(--darkBlue);
+  h1{
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 700;
     color: white;
-    border: 2px solid white;
+    text-shadow: 2px 2px 2px var(--darkBlue);
+  }
+  #content{
+    margin: 1% auto;
+  }
+  /* Style du slider */
+  #sliderContainer{
+    height: 85vh;
   }
   #slide1{
     background: url('../img/slides/slide_01.png') no-repeat center center;
@@ -361,15 +368,6 @@ input{
   #slide4{
     background: url('../img/slides/slide_04.png') no-repeat center center;
     background-size: contain;
-  }
-  /* Style du contenu */
-  #content{
-    margin-top: 0;
-  }
-
-  /* Style du slider */
-  #sliderContainer{
-    height: 90vh;
   }
 
   /* Style de la vue */
@@ -437,12 +435,19 @@ input{
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    align-content: flex-start;
+  }
+  #infosContainer *{
+    margin: .5% 2.5%;
+    text-align: left;
+  }
+  #infosContainer span{
+    margin: .5% 0;
   }
   #formUtilisateur, #canvasesContainer{
     max-height: 20%;
   }
   .infosReservation{
     font-size: 1rem;
-    text-align: left;
   }
 } /* Fin media queries desktop */

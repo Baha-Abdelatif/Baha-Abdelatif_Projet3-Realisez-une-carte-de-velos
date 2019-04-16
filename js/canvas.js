@@ -53,7 +53,7 @@ class Canvas{
       if(this.clickDrag[i] && i){
         this.context.moveTo(this.clickX[i-1], this.clickY[i-1]);
        }else{
-        this.context.moveTo(this.clickX[i]-1, this.clickY[i]);
+        this.context.moveTo(this.clickX[i]-1, this.clickY[i]-1);
        }
        this.context.lineTo(this.clickX[i], this.clickY[i]);
        this.context.closePath();

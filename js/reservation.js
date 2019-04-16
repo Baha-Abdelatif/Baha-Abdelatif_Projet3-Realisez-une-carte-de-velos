@@ -26,19 +26,19 @@ class ReservationUtilisateur{
     sessionStorage.setItem('countDownReservationMin', this.countDownReservation.min);
     sessionStorage.setItem('countDownReservationSec', this.countDownReservation.sec);
     sessionStorage.setItem('timestampReservation', Date.now());
-  } // Fin methode sessionStorage
+  } // Fin méthode sessionStorage
 
   sessionConfirm(){
-    // Confirmation de la reservation
+    // Confirmation de la réservation
     // Initialisation du compte a rebours
     // initialisation du stockage des données utilisateur
-    // Affichage des informations reservation
+    // Affichage des informations réservation
     clearInterval(timeObjects.compteur);
     this.sessionStorage();
     timeObjects.compteur = setInterval(timeObjects.countDown,1000);
     $('#canvasesContainer').css("display", "none");
     $('#formUtilisateur').css("display", "block");
-    $('#alerteReservation').text("Confirmation : Votre reservation a été enregistrée.");
+    $('#alerteReservation').text("Confirmation : Votre réservation a été enregistrée.");
     $('#nomReservation').text(`Réservation faite au nom de ${sessionStorage.nomReservation} ${sessionStorage.prenomReservation}.`);
     $('#dateReservation').text(`Le ${sessionStorage.heureReservation}`);
     $('#countDownReservation').html(`Temps restant : <span id="countDownMin">${sessionStorage.countDownReservationMin}</span>mn<span id="countDownSec">${sessionStorage.countDownReservationSec}</span>s.`);
@@ -50,20 +50,20 @@ class ReservationUtilisateur{
     $('.stationsToulouse').removeClass('hidden');
     $('#availableStands').css('width', `${(((this.station.available_bike_stands+1) * 100)/this.station.bike_stands)*2-2}px`);
     $('#availableBikes').css('width', `${(((this.station.available_bikes-1) * 100)/this.station.bike_stands)*2-2}px`);
-  } // Fin methode sessionConfirm
+  } // Fin méthode sessionConfirm
 
   sessionError(){
-    // Rejet de la reservation
+    // Rejet de la réservation
     // Affichage d'un message d'erreur
-    $('#alerteReservation').text("Erreur : Veuillez signer le formulaire pour confirmer la reservation.");
+    $('#alerteReservation').text("Erreur : Veuillez signer le formulaire pour confirmer la réservation.");
     $('.infosReservation').css('display', 'block');
-  } // Fin Methode sessionError
+  } // Fin Méthode sessionError
 
   emptyStation(station){
-    // Methode appelée si la station selectionée est vide
+    // Méthode appelée si la station sélectionnée est vide
     $('.infosReservation').text('');
     $('#alerteReservation').text('Réservation Impossible : Station vide.');
-    $('#nomReservation').text('Veuillez selectionner une autre station ou revenir ulterieurement.');
+    $('#nomReservation').text('Veuillez sélectionner une autre station ou revenir ultérieurement.');
     $('#dateReservation').text(`Derniere mise a jour le ${timeObjects.afficherHeure()}`);
     $('#idStationReservation').text(`Nom de la station : ${station.nameStation}`);
     $('#adresseStationReservation').text(`Adresse : ${station.address}`);

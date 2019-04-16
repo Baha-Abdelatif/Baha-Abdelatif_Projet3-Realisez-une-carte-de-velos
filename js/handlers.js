@@ -1,9 +1,9 @@
 let handlerTools = {
   init(){
-    // Appellee au chargement de la page
+    // Appelée au chargement de la page
     // appelle la fonction d'initialisation du slider
-    // initialise la requete ajax
-    // verifie qu'un marqueur est selectionné et les informations de sessions
+    // initialise la requête ajax
+    // vérifie qu'un marqueur est sélectionné et les informations de sessions
     sliderObject.init();
     const form = $('#formUtilisateur');
     handlerTools.checkSession(form)
@@ -17,9 +17,9 @@ let handlerTools = {
   }, // Fermeture Méthode init
 
   getCallBack(reponse){
-    // Méthode appelée a la reception de la reponse AJAX
+    // Méthode appelée a la réception de la réponse AJAX
     // initialise la carte
-    // parcours la reponse de l'api jc decaux et Cree un nouvel objet station avec chaque station recuperée
+    // parcours la réponse de l'api jc decaux et Crée un nouvel objet station avec chaque station récupérée
     const mymap = L.map('mapid').setView([43.603887, 1.437677], 15);
     handlerTools.mapbox(mymap);
     let listeStations = reponse;
@@ -45,7 +45,7 @@ let handlerTools = {
   }, // Fermeture Méthode mapbox
 
   noMarkerSelected(form){
-    // "ecouteur de securité" verification qu'un marqueur est selectionné lors de la soumission du formulaire
+    // "écouteur de sécurité" vérification qu'un marqueur est sélectionné lors de la soumission du formulaire
     form.on('submit', (e) => {
       $('#alerteReservation').text('Réservation Impossible : Veuillez sélectionner une station.');
       $('#alerteReservation').siblings().css('display', 'none');
@@ -55,14 +55,14 @@ let handlerTools = {
   }, // Fermeture Méthode noMarkerSelected
 
   checkSession(form){
-    // Méthode verifiant si une reservation ulterieure existe
-    // pour pré remplir le formulaire et afficher les infos reservation
+    // Méthode vérifiant si une réservation ultérieure existe
+    // pour pré remplir le formulaire et afficher les infos réservation
     if(localStorage.nomUtilisateur){
       $('#nomUtilisateur').val(localStorage.nomUtilisateur);
       $('#prenomUtilisateur').val(localStorage.prenomUtilisateur);
     }
     if(sessionStorage.heureReservation){
-      $('#alerteReservation').text("Information : Une reservation est enregistrée.");
+      $('#alerteReservation').text("Information : Une réservation est enregistrée.");
       $('#nomReservation').text(`Réservation faite au nom de ${sessionStorage.nomReservation} ${sessionStorage.prenomReservation}.`);
       $('#dateReservation').text(`Le ${sessionStorage.heureReservation}`);
       $('#countDownReservation').html(`Temps restant : <span id="countDownMin">${sessionStorage.countDownReservationMin}</span>mn<span id="countDownSec">${sessionStorage.countDownReservationSec}</span>s.`);

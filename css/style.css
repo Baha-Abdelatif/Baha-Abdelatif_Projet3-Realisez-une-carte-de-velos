@@ -307,7 +307,7 @@ input{
 #submitSignature.btn-success{
   background-color: var(--green);
 }
-/* Style de la section Infos Reservation */
+/* Style de la section Infos Réservation */
 #infosContainer{
   background-color: var(--transparentRed);
   height: 55vh;

@@ -6,9 +6,9 @@ class Formulaire {
   } // Fin constructor
 
   checkLength(){
-    // Verification des information saisies dans le formulaire
+    // Vérification des information saisies dans le formulaire
     // retourne false et ajoute le message d'erreur associé en cas d'erreur
-    // retourne true en cas de succes
+    // retourne true en cas de succès
     const formRegex = /[\W+\d+]*[^\s\'a-zA-Z+\-áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+/m;
     if((this.nomUtilisateur.length < 3)
       || (this.prenomUtilisateur.length < 3)
@@ -17,16 +17,16 @@ class Formulaire {
       || (formRegex.test(this.prenomUtilisateur))
       || (formRegex.test(this.nomUtilisateur))){
         if(this.nomUtilisateur.length < 3){
-          this.returnedMessage += "Le nom est trop court (3 caracteres min.)<br/>";
+          this.returnedMessage += "Le nom est trop court (3 caractères min.)<br/>";
         }
         if(this.nomUtilisateur.length > 21){
-          this.returnedMessage += "Le nom est trop long (21 caracteres max.)<br/>";
+          this.returnedMessage += "Le nom est trop long (21 caractères max.)<br/>";
         }
         if(this.prenomUtilisateur.length < 3){
-          this.returnedMessage += "Le prénom est trop court (3 caracteres min.)<br/>";
+          this.returnedMessage += "Le prénom est trop court (3 caractères min.)<br/>";
         }
         if(this.prenomUtilisateur.length > 21){
-          this.returnedMessage += "Le prénom est trop long (21 caracteres max.)<br/>";
+          this.returnedMessage += "Le prénom est trop long (21 caractères max.)<br/>";
         }
         if(formRegex.test(this.prenomUtilisateur)){
           this.returnedMessage += "Le prénom contient des caractères non autorisés.<br/>";
@@ -38,12 +38,12 @@ class Formulaire {
       }else{
         return true;
       }
-  } // Fin methode checkLength
+  } // Fin méthode checkLength
 
   checkForm(self, reservation, canvas){
-    // Methode de confirmation du formulaire
-    // Affiche les informations de reservation
-    // apelle la methode d'initialisation du canvas
+    // Méthode de confirmation du formulaire
+    // Affiche les informations de réservation
+    // appelle la méthode d'initialisation du canvas
     if(this.checkLength()){
       $('#alerteReservation').text("Formulaire vérifié : Veuillez signer pour confirmer votre réservation.");
       $('#alerteReservation').siblings().text("");
@@ -59,6 +59,6 @@ class Formulaire {
       $('#alerteReservation').css('display', 'block');
       $('.infosReservation').css('display', 'block');
     }
-  } // Fin methode checkForm
+  } // Fin méthode checkForm
 } // Fin Classe Formulaire
 

@@ -42,14 +42,14 @@ let sliderObject = {
   }, // Fin Méthode previousSlide
 
   nextSlide(){
-    // Méthode chargée de passer a la slide precedente
+    // Méthode chargée de passer a la slide précédente
     sliderObject.slideActive++;
     sliderObject.checkInterval();
     sliderObject.afficherSlide(sliderObject.slideActive);
   }, // Fin Méthode nextSlide
 
   checkInterval(){
-    // Methode verifiant que la slide est dans l'intervale
+    // Méthode vérifiant que la slide est dans l’intervalle
     if(sliderObject.slideActive >= sliderObject.sliderTableau.length+1){
       sliderObject.slideActive = 1;
     }
@@ -59,7 +59,7 @@ let sliderObject = {
   }, // Fin Méthode checkInterval
 
   afficherSlide(index){
-    // Methode chargée d'afficher et masquer les slides
+    // Méthode chargée d'afficher et masquer les slides
     $(`#slide${index}`).siblings().removeClass('slide-active');
     $(`#slide${index}`).addClass('slide-active');
     $(`#button-slide${index}`).siblings().removeClass('button-active');
@@ -67,10 +67,10 @@ let sliderObject = {
   }, // Fin Méthode afficherSlide
 
   arrowsKeyboard(e){
-    // Methode de controle du slider aux fleches du clavier
-    if(e.keyCode===37){ // fleche gauche
+    // Méthode de contrôle du slider aux flèches du clavier
+    if(e.keyCode===37){ // flèche gauche
       sliderObject.previousSlide();
-    }else if(e.keyCode===39){ // fleche droite
+    }else if(e.keyCode===39){ // flèche droite
       sliderObject.nextSlide();
     }
   } // Fin Méthode arrowsKeyboard

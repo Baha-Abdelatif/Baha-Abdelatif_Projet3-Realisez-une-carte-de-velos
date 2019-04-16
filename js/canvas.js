@@ -18,7 +18,7 @@ class Canvas{
   init(reservation){
     // Affiche le canvas et masque le formulaire
     // initialise le style du canvas
-    // et les gestionnaires d'evenements associés
+    // et les gestionnaires d’événements associés
     $('#canvasesContainer').css("display", "block");
     $('#formUtilisateur').css("display", "none");
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -62,16 +62,16 @@ class Canvas{
   } // Fin méthode redraw
 
   mousedown(e){
-    // Methode appelée lors du clic sur le canvas
+    // Méthode appelée lors du clic sur le canvas
     // indique que l'on peut dessiner en fixant paint a true
-    // envoie la position du curseur au moment du clic a la methode addClick
+    // envoie la position du curseur au moment du clic a la méthode addClick
     this.paint = true;
     this.addClick(e.offsetX, e.offsetY);
     this.redraw();
   } // Fin méthode mousedown
 
   mousemove(e){
-    // Methode appelée lors du deplacement de la souris sur le canvas
+    // Méthode appelée lors du déplacement de la souris sur le canvas
     if(this.paint){
       this.addClick(e.offsetX, e.offsetY, true);
       this.redraw();
@@ -79,13 +79,13 @@ class Canvas{
   } // Fin méthode mousemove
 
   mouseleave(){
-    // Methode appelée a la sortie du canvas et lors du relachement du clic
+    // Méthode appelée a la sortie du canvas et lors du relâchement du clic
     this.paint = false;
   } // Fin méthode mouseleave
 
   touchdown(e,self){
-    // Methode appelée lors du toucher sur le canvas
-    // recupere la position du point de toucher et trace un point de 3px
+    // Méthode appelée lors du toucher sur le canvas
+    // récupère la position du point de toucher et trace un point de 3px
     e.preventDefault();
     let clientRect = {
       x : self.canvas.getBoundingClientRect().left,
@@ -97,12 +97,12 @@ class Canvas{
       self.context.fillRect(touches[i].clientX-clientRect.x, touches[i].clientY - clientRect.y, 3, 3);
       self.touchCheck++;
     }
-  } // Fin methode touchdown
+  } // Fin méthode touchdown
 
   touchmove(e,self){
-    // Methode appelée lorsque le toucher est maintenu et que le doigt se deplace sur le canvas
-    // recupere les positions de la souris lors du deplacement du toucher
-    // redessine le canvas a chaque deplacement
+    // Méthode appelée lorsque le toucher est maintenu et que le doigt se déplace sur le canvas
+    // récupère les positions de la souris lors du déplacement du toucher
+    // redessine le canvas a chaque déplacement
     e.preventDefault();
     let clientRect = {
       x : self.canvas.getBoundingClientRect().left,
@@ -119,17 +119,17 @@ class Canvas{
       self.touchDrag.splice(touchIndex, 1, touches[i]);
       self.touchCheck++;
     }
-  } // Fin methode touchmove
+  } // Fin méthode touchmove
 
   touchup(e,self){
-    // Methode appelée lorsque le toucher est relaché
+    // Méthode appelée lorsque le toucher est relâché
     // retire le dernier point de la liste des touchers
     e.preventDefault();
     let touches = e.changedTouches;
     for (let i=0; i<touches.length; i++){
       self.touchDrag.splice(i, 1);
     }
-  } // Fin methode touchup
+  } // Fin méthode touchup
 
   findTouchDragIndex(idToFind,self){
     // analyse le tableau touchDrag contenant la liste des points du toucher en cours,
@@ -141,10 +141,10 @@ class Canvas{
       }
     }
     return -1;
-  } // Fin methode findTouchDragIndex
+  } // Fin méthode findTouchDragIndex
 
   clearBoard(self){
-    // Efface et masque le canvas, pour réafficher le formulaire
+    // Efface et masque le canvas, pour ré-afficher le formulaire
     self.context.clearRect(0, 0, self.canvas.width, self.canvas.height);
     if(self.clickX){
       self.clickX.splice(0, self.clickX.length);
@@ -166,7 +166,7 @@ class Canvas{
   } // Fin méthode clearBoard
 
   validationSignature(reservation){
-    // Verifie qu'une signature a été saisie a la souris ou au toucher
+    // Vérifie qu'une signature a été saisie a la souris ou au toucher
     if(this.clickDrag.length>0 || this.touchCheck>0){
       this.clearBoard(this);
       reservation.sessionConfirm();

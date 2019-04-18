@@ -59,14 +59,14 @@ class ReservationUtilisateur{
     $('.infosReservation').css('display', 'block');
   } // Fin Méthode sessionError
 
-  emptyStation(station){
+  emptyStation(){
     // Méthode appelée si la station sélectionnée est vide
     $('.infosReservation').text('');
     $('#alerteReservation').text('Réservation Impossible : Station vide.');
     $('#nomReservation').text('Veuillez sélectionner une autre station ou revenir ultérieurement.');
     $('#dateReservation').text(`Derniere mise a jour le ${timeObjects.afficherHeure()}`);
-    $('#idStationReservation').text(`Nom de la station : ${station.nameStation}`);
-    $('#adresseStationReservation').text(`Adresse : ${station.address}`);
+    $('#idStationReservation').text(`Nom de la station : ${this.station.nameStation}`);
+    $('#adresseStationReservation').text(`Adresse : ${this.station.address}`);
     $('.infosReservation').css('display', 'block');
   } // Fin emptyStation
 }// Fin class ReservationUtilisateur

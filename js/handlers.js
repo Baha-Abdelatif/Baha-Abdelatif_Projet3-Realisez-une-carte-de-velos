@@ -1,3 +1,4 @@
+
 let handlerTools = {
   init(){
     // Appelée au chargement de la page

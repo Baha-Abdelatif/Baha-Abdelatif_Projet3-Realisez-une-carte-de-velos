@@ -20,7 +20,7 @@ body{
   overflow-x: hidden;
   overflow-y: auto;
 }
-#viewContent, #infosContainer, header{
+#viewContainer, #infosContainer, header{
   box-shadow: 1px 2px 3px var(--bdxRed);
 }
 #content{
@@ -371,7 +371,7 @@ input{
   }
 
   /* Style de la vue */
-  #viewContent{
+  #viewContainer{
     box-shadow: none;
     width: 98%;
     height: 100vh;

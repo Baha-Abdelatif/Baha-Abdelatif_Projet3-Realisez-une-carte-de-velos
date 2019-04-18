@@ -49,7 +49,7 @@ let sliderObject = {
   }, // Fin Méthode nextSlide
 
   checkInterval(){
-    // Méthode vérifiant que la slide est dans l’intervalle
+    // Méthode vérifiant que la variable slideActive est dans l’intervalle
     if(sliderObject.slideActive >= sliderObject.sliderTableau.length+1){
       sliderObject.slideActive = 1;
     }

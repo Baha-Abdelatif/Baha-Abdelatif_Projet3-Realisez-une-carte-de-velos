@@ -40,7 +40,7 @@ class Formulaire {
       }
   } // Fin méthode checkLength
 
-  checkForm(self, reservation, canvas){
+  checkForm(reservation, canvas){
     // Méthode de confirmation du formulaire
     // Affiche les informations de réservation
     // appelle la méthode d'initialisation du canvas

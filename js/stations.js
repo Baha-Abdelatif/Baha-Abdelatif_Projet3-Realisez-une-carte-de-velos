@@ -30,12 +30,11 @@ class StationObject {
   addMarkerOnMap(map){
     // Méthode chargée de l'ajout des marqueurs a la carte et des événements associés
     let stationMarker = L.marker([this.position.lat, this.position.lng], this.getMarkerColor());
-    let self = this;
     stationMarker.on('click', ()=>{
       $('#canvasesContainer').css("display", "none");
       $('#formUtilisateur').css("display", "block");
       $('.infosReservation').css('display', 'none');
-      self.markerOnClick();
+      this.markerOnClick();
     });
     stationMarker.addTo(map);
   } // Fin addMarkerOnMap
@@ -46,24 +45,23 @@ class StationObject {
     // désactive l’écouteur de sécurité sur le formulaire
     // initialise un nouvel écouteur d’événement
     this.ficheInfoStation.eltCreator();
-    let self = this;
     const form = $('#formUtilisateur');
     form.off();
     form.on('submit', (e)=>{
-      self.stationSubmit(e, self)
+      this.stationSubmit(e)
     })
   } // Fin markerOnclick
 
-  stationSubmit(e, self){
+  stationSubmit(e){
     // Méthode appelée lors de la soumission du formulaire si un marqueur est sélectionné
     // crée un nouvel objet formulaire, un nouvel objet canvas et un nouvel objet réservation
     let formulaire = new Formulaire();
     let canvas = new Canvas();
-    let reservation = new ReservationUtilisateur(self, formulaire, canvas);
-    if(self.checkStatus()){
-      formulaire.checkForm(self, reservation, canvas);
+    let reservation = new ReservationUtilisateur(this, formulaire, canvas);
+    if(this.checkStatus()){
+      formulaire.checkForm(reservation, canvas);
     }else{
-      reservation.emptyStation(self);
+      reservation.emptyStation();
     }
     e.preventDefault();
   }
